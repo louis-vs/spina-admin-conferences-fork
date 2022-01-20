@@ -21,14 +21,14 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   # to allow pushing to a single host or delete this section to allow pushing to any host.
   raise 'RubyGems 2.0 or newer is required to protect against public gem pushes.' unless spec.respond_to?(:metadata)
 
-  spec.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
+  spec.files = Dir['{app,config,db,lib,vendor}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
   spec.add_dependency 'icalendar', '~> 2.5'
   spec.add_dependency 'mobility-actiontext', '0.2.0'
   spec.add_dependency 'rails', '~> 6.0'
   spec.add_dependency 'rails-i18n', '~> 6.0'
   spec.add_dependency 'redis', '~> 4.2'
-  spec.add_dependency 'spina', '~> 2.0'
+  spec.add_dependency 'spina', '~> 2.0.0'
   spec.add_dependency 'stimulus-rails', '~> 0.2.2'
   spec.add_dependency 'turbo-rails', '~> 0.5.9'
 
