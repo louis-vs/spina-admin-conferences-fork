@@ -9,10 +9,17 @@ module Spina
 
         add_flash_types :success
 
-        layout 'spina/admin/conferences/application', only: %i[new edit]
+        layout :admin_layout
+
         before_action :set_locale
 
+        admin_section :conferences
+
         private
+
+        def admin_layout
+          'spina/admin/admin'
+        end
 
         def set_locale
           @locale = params[:locale] || I18n.default_locale

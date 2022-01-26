@@ -10,8 +10,6 @@ module Spina
         before_action :set_breadcrumbs
         before_action :set_tabs
 
-        layout 'spina/admin/conferences/institutions'
-
         # @!group Actions
 
         # Renders a list of rooms.

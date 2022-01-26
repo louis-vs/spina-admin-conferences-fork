@@ -11,8 +11,6 @@ module Spina
         before_action :set_tabs
         before_action :set_conferences, :set_institutions, only: %i[new edit]
 
-        layout 'spina/admin/conferences/conferences'
-
         # @!group Actions
 
         # Renders a list of sessions.
