@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'icalendar', '~> 2.5'
   spec.add_dependency 'mobility-actiontext', '0.2.0'
   spec.add_dependency 'rails', '~> 6.0'
-  spec.add_dependency 'rails-i18n', '~> 6.0'
+  spec.add_dependency 'rails-i18n', '>= 6', '< 8'
   spec.add_dependency 'redis', '~> 4.2'
   spec.add_dependency 'spina', '~> 2.0.0'
   spec.add_dependency 'stimulus-rails', '~> 0.2.2'
