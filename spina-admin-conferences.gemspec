@@ -33,7 +33,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'turbo-rails', '~> 0.5.9'
 
   spec.add_development_dependency 'capybara', '~> 3.33'
-  spec.add_development_dependency 'codecov', '~> 0.4'
   spec.add_development_dependency 'dotenv-rails', '~> 2.7'
   spec.add_development_dependency 'image_processing', '~> 1.12'
   spec.add_development_dependency 'minitest-rails', '~> 6.0'
