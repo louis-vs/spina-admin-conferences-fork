@@ -19,3 +19,6 @@ coverage/
 
 # Ignore master key for decrypting credentials and more.
 **/config/master.key
+
+test/fixtures/files/delegates.csv
+test/fixtures/files/presentations.csv
