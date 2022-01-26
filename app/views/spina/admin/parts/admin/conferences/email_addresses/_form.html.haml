@@ -1,2 +1,2 @@
-.page-form-label= f.object.title
-.page-form-control= f.email_field :content, placeholder: f.object.title
+= render Spina::Forms::GroupComponent.new(label: f.object.title) do
+  = f.email_field :content, placeholder: f.object.title
