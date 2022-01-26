@@ -4,6 +4,8 @@
 require 'simplecov'
 
 if ENV['CI']
+  require 'simplecov-lcov'
+
   SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
 
   SimpleCov.start 'rails' do
