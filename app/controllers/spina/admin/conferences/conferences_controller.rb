@@ -19,7 +19,7 @@ module Spina
         ].freeze
         CONTENT_PARAMS = Spina.config.locales.inject({}) { |params, locale| params.merge("#{locale}_content_attributes": [*PARTS_PARAMS]) }
         PARAMS = [:start_date, :finish_date, :name, **CONTENT_PARAMS,
-          events_attributes: %i[id name start_datetime finish_datetime description location] ].freeze
+          events_attributes: %i[id name start_datetime finish_datetime description location]].freeze
         PARTS = %w[text submission_url submission_email_address submission_date submission_text gallery sponsors].freeze
 
         before_action :set_conference, only: %i[edit update destroy]

@@ -5,6 +5,13 @@ require:
 
 AllCops:
   NewCops: enable
+  Exclude:
+    - test/dummy/db/schema.rb
+    - test/dummy/db/migrate/*.rb
+    - node_modules/**/*
+    - tmp/**/*
+    - vendor/**/*
+    - .git/**/*
 
 Style/CommandLiteral:
   EnforcedStyle: mixed
@@ -16,6 +23,14 @@ Layout/LineLength:
   Max: 140
   AutoCorrect: true
 
-Metrics/BlockLength:
+Naming/VariableNumber:
   Exclude:
-    - test/dummy/db/schema.rb
+    - test/**/*
+
+Metrics/MethodLength:
+  Exclude:
+    - db/migrate/*.rb
+
+Metrics/ClassLength:
+  Exclude:
+    - db/migrate/*.rb

@@ -16,9 +16,9 @@ module Spina
         # Performs the job.
         # @param file [String] the UTF-8-encoded string to parse as a CSV
         # @yieldparam row [Hash] the current row of the CSV
-        def import(file)
+        def import(file, &block)
           csv_rows = CSV.parse file, encoding: 'UTF-8', headers: true, header_converters: :symbol, converters: [:json]
-          csv_rows.each { |row| yield(row) }
+          csv_rows.each(&block)
         end
       end
     end

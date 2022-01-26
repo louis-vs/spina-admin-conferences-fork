@@ -14,7 +14,7 @@ module Spina
             @migrations_path ||= nil
           end
 
-          class_methods do
+          class_methods do # rubocop:disable Metrics/BlockLength
             def rename_migration(name, to:)
               config.after_initialize do
                 migration = {}
@@ -32,7 +32,7 @@ module Spina
 
             attr_reader :duplicate_migrations
 
-            class DuplicateMigrationsError < ::StandardError
+            class DuplicateMigrationsError < ::StandardError # rubocop:disable Lint/ConstantDefinitionInBlock
               def initialize(migrations)
                 messages = migrations.collect { |migration| generate_message(migration) }
                 super(messages.join("\n"))
@@ -42,7 +42,7 @@ module Spina
 
               MIGRATION_REGEXP = /([0-9]+)_.+\.(spina(_admin)?_conferences).rb$/.freeze
 
-              def generate_message(migration)
+              def generate_message(migration) # rubocop:disable Metrics/AbcSize
                 old_version, old_scope = parse_filename(migration[:old][:file])
                 messages = []
                 messages << "#{File.basename(migration[:new][:file])} is a renamed version of #{File.basename(migration[:old][:file])}."

@@ -11,7 +11,7 @@ Spina::Part.register(Spina::Parts::Admin::Conferences::Url)
 # If you have custom partables you must modify this migration to ensure the conversion of your partables is handled appropriately
 # by implementing <tt>convert_to_json!</tt> for your partables.
 class ConvertPartablesToJson < ActiveRecord::Migration[6.1]
-  def up # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+  def up # rubocop:disable Metrics/AbcSize
     announce 'converting partables to JSON parts'
     Spina.config.locales.each do |locale|
       I18n.with_locale(locale) do
@@ -37,7 +37,7 @@ class ConvertPartablesToJson < ActiveRecord::Migration[6.1]
     end
   end
 
-  def down # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+  def down # rubocop:disable Metrics/AbcSize
     announce 'converting JSON parts to partables'
     Spina.config.locales.each do |locale|
       I18n.with_locale(locale) do

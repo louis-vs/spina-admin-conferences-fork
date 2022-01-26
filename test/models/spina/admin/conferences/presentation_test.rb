@@ -148,8 +148,11 @@ module Spina
 
         test 'performs import job' do
           file_fixture('presentations.csv.erb').read
-            .then { |file| ERB.new(file).result(binding) }
-            .then { |result| Pathname.new(File.join(file_fixture_path, 'presentations.csv')).write(result) }
+                                               .then { |file| ERB.new(file).result(binding) }
+                                               .then do |result|
+            Pathname.new(File.join(file_fixture_path,
+                                   'presentations.csv')).write(result)
+          end
           assert_enqueued_jobs 1, only: PresentationImportJob do
             Presentation.import file_fixture('presentations.csv')
           end

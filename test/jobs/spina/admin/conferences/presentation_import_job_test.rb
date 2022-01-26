@@ -8,8 +8,11 @@ module Spina
       class PresentationImportJobTest < ActiveJob::TestCase
         setup do
           file_fixture('presentations.csv.erb').read
-            .then { |file| ERB.new(file).result(binding) }
-            .then { |result| Pathname.new(File.join(file_fixture_path, 'presentations.csv')).write(result) }
+                                               .then { |file| ERB.new(file).result(binding) }
+                                               .then do |result|
+            Pathname.new(File.join(file_fixture_path,
+                                   'presentations.csv')).write(result)
+          end
         end
 
         test 'job changes number of presentations' do

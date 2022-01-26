@@ -7,7 +7,7 @@ module Spina
     module Conferences
       class ConferenceTest < ActiveSupport::TestCase # rubocop:disable Metrics/ClassLength
         setup do
-          @conference = spina_admin_conferences_conferences :university_of_atlantis_2017 # rubocop:disable Naming/VariableNumber
+          @conference = spina_admin_conferences_conferences :university_of_atlantis_2017
           @empty_conference = spina_admin_conferences_conferences :empty_conference
           @new_conference = Conference.new
         end
@@ -179,11 +179,11 @@ module Spina
 
         test 'returns an array of localized dates' do
           assert_equal @conference.dates.begin.iso8601, @conference.localized_dates.first[:date]
-          assert_equal I18n.localize(@conference.dates.begin, format: :long),
+          assert_equal I18n.l(@conference.dates.begin, format: :long),
                        @conference.localized_dates.first[:localization]
           assert_equal @conference.dates.entries.size, @conference.localized_dates.size
           I18n.locale = :ja
-          assert_equal I18n.localize(@conference.dates.begin, format: :long),
+          assert_equal I18n.l(@conference.dates.begin, format: :long),
                        @conference.localized_dates.first[:localization]
           assert_nil @new_conference.localized_dates
           I18n.locale = I18n.default_locale

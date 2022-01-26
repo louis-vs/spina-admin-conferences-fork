@@ -6,7 +6,7 @@ $LOAD_PATH.push File.expand_path('lib', __dir__)
 require 'spina/admin/conferences/version'
 
 # Describe your gem and declare its dependencies:
-Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
+Gem::Specification.new do |spec|
   spec.name = 'spina-admin-conferences-fork'
   spec.version = Spina::Admin::Conferences::VERSION
   spec.authors = ['Louis Van Steene', 'Justin Malčić']

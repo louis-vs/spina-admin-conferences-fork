@@ -8,8 +8,8 @@ module Spina
       class DelegateImportJobTest < ActiveJob::TestCase
         setup do
           file_fixture('delegates.csv.erb').read
-            .then { |file| ERB.new(file).result(binding) }
-            .then { |result| Pathname.new(File.join(file_fixture_path, 'delegates.csv')).write(result) }
+                                           .then { |file| ERB.new(file).result(binding) }
+                                           .then { |result| Pathname.new(File.join(file_fixture_path, 'delegates.csv')).write(result) }
         end
 
         test 'job changes number of delegates' do
