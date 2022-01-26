@@ -10,7 +10,7 @@ module Spina
 
         initializer 'spina.admin.conferences.assets' do
           Spina.config.importmap.draw do
-            pin_all_from Spina::Admin::Conferences::Engine.root.join('app/assets/javascripts/spina/admin/conferences/controllers'), # rubocop:disable Layout/LineLength
+            pin_all_from Spina::Admin::Conferences::Engine.root.join('app/assets/javascripts/spina/admin/conferences/controllers'),
                          under: 'controllers', to: 'spina/admin/conferences/controllers'
           end
 

@@ -25,12 +25,12 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir['{app,config,db,lib,vendor}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
+  spec.add_dependency 'haml-rails', '~> 2.0'
   spec.add_dependency 'icalendar', '~> 2.5'
   spec.add_dependency 'mobility-actiontext', '0.2.0'
-  spec.add_dependency 'redis', '~> 4.2'
-  spec.add_dependency 'haml-rails', '~> 2.0'
   spec.add_dependency 'rails', '>= 6.0', '< 8'
   spec.add_dependency 'rails-i18n', '>= 6.0', '< 8'
+  spec.add_dependency 'redis', '~> 4.2'
   spec.add_dependency 'spina', '~> 2.8'
 
   spec.add_development_dependency 'capybara', '~> 3.33'
