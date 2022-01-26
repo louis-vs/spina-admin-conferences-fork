@@ -89,7 +89,7 @@ module Spina
         # @return [void]
         # @see PresentationImportJob#perform
         def self.import(file)
-          PresentationImportJob.perform_later IO.read(file)
+          PresentationImportJob.perform_later File.read(file)
         end
 
         # @return [Date, nil] the start date of the presentation. Nil if the presentation has no start date and time

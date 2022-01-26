@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateSpinaConferencesConferencePageParts < ActiveRecord::Migration[5.2] #:nodoc:
+class CreateSpinaConferencesConferencePageParts < ActiveRecord::Migration[5.2] # :nodoc:
   def change
     create_table :spina_conferences_conference_page_parts do |t|
       t.belongs_to :conference_page, foreign_key: { to_table: :spina_pages, on_delete: :cascade },

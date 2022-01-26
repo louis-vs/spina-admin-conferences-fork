@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ChangeSpinaResources < ActiveRecord::Migration[6.0] #:nodoc:
+class ChangeSpinaResources < ActiveRecord::Migration[6.0] # :nodoc:
   def up
     insert <<-SQL.squish, 'Insert conference pages resource if missing'
       INSERT INTO spina_resources (name, label, created_at, updated_at)

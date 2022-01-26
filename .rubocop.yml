@@ -34,3 +34,7 @@ Metrics/MethodLength:
 Metrics/ClassLength:
   Exclude:
     - db/migrate/*.rb
+
+Rails/I18nLocaleAssignment:
+  Exclude:
+    - test/**/*

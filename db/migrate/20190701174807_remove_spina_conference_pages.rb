@@ -2,7 +2,7 @@
 
 # This migration comes from spina_conferences (originally 20190701174807)
 
-class RemoveSpinaConferencePages < ActiveRecord::Migration[6.0] #:nodoc:
+class RemoveSpinaConferencePages < ActiveRecord::Migration[6.0] # :nodoc:
   def up
     insert <<-SQL.squish, 'Insert conferences parts'
       WITH parts AS (

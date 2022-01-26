@@ -204,15 +204,13 @@ module Spina # :nodoc: all
 
     def convert_page_parts_to_json!
       page_parts.reject { |page_part| page_part.page_partable.nil? }
-                .collect(&:convert_to_json!)
-                .compact
+                .filter_map(&:convert_to_json!)
                 .then { |parts| send(:"#{I18n.locale}_content").union(parts) }
                 .then { |parts| update("#{I18n.locale}_content": parts) }
     end
 
     def convert_json_to_parts!
-      update(page_parts: send(:"#{I18n.locale}_content").collect(&:convert_to_partable!)
-                                                        .compact
+      update(page_parts: send(:"#{I18n.locale}_content").filter_map(&:convert_to_partable!)
                                                         .collect { |partable| PagePart.new(page_partable: partable) })
     end
   end
@@ -222,16 +220,14 @@ module Spina # :nodoc: all
 
     def convert_layout_parts_to_json!
       layout_parts.reject { |layout_part| layout_part.layout_partable.nil? }
-                  .collect(&:convert_to_json!)
-                  .compact
+                  .filter_map(&:convert_to_json!)
                   .then { |parts| send(:"#{I18n.locale}_content").union(parts) }
                   .then { |parts| update("#{I18n.locale}_content": parts) }
     end
 
     def convert_json_to_parts!
       update(layout_parts: send(:"#{I18n.locale}_content")
-                             .collect(&:convert_to_partable!)
-                             .compact
+                             .filter_map(&:convert_to_partable!)
                              .collect { |partable| LayoutPart.new(layout_partable: partable) })
     end
   end
@@ -242,8 +238,7 @@ module Spina # :nodoc: all
 
     def convert_to_json!
       Parts::RepeaterContent.new(parts: structure_parts.reject { |structure_part| structure_part.structure_partable.nil? }
-                                                       .collect(&:convert_to_json!)
-                                                       .compact)
+                                                       .filter_map(&:convert_to_json!))
     end
   end
 
@@ -298,8 +293,7 @@ module Spina # :nodoc: all
 
     class RepeaterContent < Base
       def convert_to_structure_item!
-        Spina::StructureItem.new(structure_parts: parts.collect(&:convert_to_partable!)
-                                                       .compact
+        Spina::StructureItem.new(structure_parts: parts.filter_map(&:convert_to_partable!)
                                                        .collect { |partable| StructurePart.new(structure_partable: partable) })
       end
     end
@@ -381,15 +375,13 @@ module Spina # :nodoc: all
 
           def convert_parts_to_json!
             parts.reject { |part| part.partable.nil? }
-                 .collect(&:convert_to_json!)
-                 .compact
+                 .filter_map(&:convert_to_json!)
                  .then { |parts| send(:"#{I18n.locale}_content").union(parts) }
                  .then { |parts| update("#{I18n.locale}_content": parts) }
           end
 
           def convert_json_to_parts!
-            update(parts: send(:"#{I18n.locale}_content").collect(&:convert_to_partable!)
-                                                         .compact
+            update(parts: send(:"#{I18n.locale}_content").filter_map(&:convert_to_partable!)
                                                          .collect { |partable| Part.new(partable: partable) })
           end
         end
