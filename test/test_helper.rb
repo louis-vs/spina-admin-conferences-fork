@@ -1,25 +1,24 @@
 # frozen_string_literal: true
 
+# CodeCov integration
 require 'simplecov'
 
 if ENV['CI']
-  require 'simplecov-lcov'
+  require 'codecov'
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
 
-  SimpleCov::Formatter::LcovFormatter.config do |config|
-    config.report_with_single_file = true
+  SimpleCov.start 'rails' do
+    enable_coverage :branch
+    add_group 'Validators', 'app/validators'
+
+    # these files don't play nicely with simplecov
+    add_filter 'app/models/spina/admin/conferences.rb'
+    add_filter 'lib/spina/admin/conferences/version.rb'
   end
-
-  SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
-end
-
-SimpleCov.start 'rails' do
-  enable_coverage :branch
-  add_group 'Validators', 'app/validators'
 end
 
 require 'minitest/mock'
 require 'minitest/reporters'
-
 Minitest::Reporters.use!
 
 require 'percy'
