@@ -4,5 +4,5 @@
   %td= time_tag presentation_type.duration, t('datetime.distance_in_words.x_minutes', count: presentation_type.minutes)
   %td.align-right
     = link_to edit_admin_conferences_presentation_type_path(presentation_type), class: %w[button button-small button-link] do
-      = icon 'pencil-outline'
+      = heroicon 'pencil-alt', style: :outline, class: 'w-4 h-4'
       = t 'spina.edit'

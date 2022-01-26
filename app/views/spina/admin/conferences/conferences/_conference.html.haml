@@ -5,5 +5,5 @@
   %td= time_tag conference.finish_date, l(conference.finish_date, format: :long)
   %td.align-right
     = link_to edit_admin_conferences_conference_path(conference), class: %w[button button-small button-link] do
-      = icon 'pencil-outline'
+      = heroicon 'pencil-alt', style: :outline, class: 'w-4 h-4'
       = t 'spina.edit'

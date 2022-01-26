@@ -4,5 +4,5 @@
   %td= link_to room.number, edit_admin_conferences_room_path(room)
   %td.align-right
     = link_to edit_admin_conferences_room_path(room), class: %w[button button-small button-link] do
-      = icon 'pencil-outline'
+      = heroicon 'pencil-alt', style: :outline, class: 'w-4 h-4'
       = t 'spina.edit'

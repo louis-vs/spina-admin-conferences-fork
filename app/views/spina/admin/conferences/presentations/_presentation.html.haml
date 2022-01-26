@@ -7,5 +7,5 @@
         %li= link_to presenter.full_name, edit_admin_conferences_delegate_path(presenter)
   %td.align-right
     = link_to edit_admin_conferences_presentation_path(presentation), class: %w[button button-small button-link] do
-      = icon 'pencil-outline'
+      = heroicon 'pencil-alt', style: :outline, class: 'w-4 h-4'
       = t 'spina.edit'

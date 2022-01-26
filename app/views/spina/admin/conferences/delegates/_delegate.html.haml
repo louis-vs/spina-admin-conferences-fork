@@ -4,10 +4,10 @@
     = delegate.email_address
     - unless delegate.email_address.blank?
       = mail_to delegate.email_address, class: %w[button button-small button-link] do
-        = icon 'mail'
+        = heroicon 'mail', style: :solid, class: 'w-7 h-7 -m1-2'
         = t 'spina.email'
   %td= delegate.institution.name
   %td.align-right
     = link_to edit_admin_conferences_delegate_path(delegate), class: %w[button button-small button-link] do
-      = icon 'pencil-outline'
+      = heroicon 'pencil-alt', style: :outline, class: 'w-4 h-4'
       = t 'spina.edit'

@@ -1,7 +1,25 @@
-- content_for(:header_actions) do
-  = link_to new_admin_conferences_presentation_type_path, class: %w[button button-primary], style: 'margin-right: 0' do
-    = icon 'plus'
-    = t '.new'
+= render Spina::UserInterface::HeaderComponent.new do |header|
+  - header.actions do
+    .ml-3
+      = link_to new_admin_conferences_presentation_type_path, class: 'btn btn-primary w-full' do
+        = heroicon 'plus', style: :solid, class: 'w-7 h-7 -m1-2'
+        = t '.new'
+
+  - header.navigation do
+    %nav.-mb-1.md:-mb-3.mt-4
+      %ul.inline-flex.w-auto.rounded-md.bg-white
+        %li
+          = render Spina::UserInterface::TabLinkComponent.new(Spina::Admin::Conferences::Conference.model_name.human(count: 0),
+                                                              admin_conferences_conferences_path,
+                                                              active: controller_name == 'conferences')
+        %li
+          = render Spina::UserInterface::TabLinkComponent.new(Spina::Admin::Conferences::PresentationType.model_name.human(count: 0),
+                                                              admin_conferences_presentation_types_path,
+                                                              active: controller_name == 'presentation_types')
+        %li
+          = render Spina::UserInterface::TabLinkComponent.new(Spina::Admin::Conferences::Session.model_name.human(count: 0),
+                                                              admin_conferences_sessions_path,
+                                                              active: controller_name == 'sessions')
 
 = render partial: 'presentation_types', object: @presentation_types
 = link_to_next_page @presentation_types, 'Next'
