@@ -1,3 +1,5 @@
-//= link spina_manifest.js
 //= link spina/admin/conferences/application.css
-//= link_tree ../javascripts
+
+//= link_directory ../javascripts/spina/admin/conferences/controllers
+
+//= link spina/admin/conferences/application.js

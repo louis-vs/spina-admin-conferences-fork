@@ -2,10 +2,10 @@
  * @external Controller
  * @see {@link https://stimulusjs.org}
  */
-import { Controller } from 'stimulus'
+import { Controller } from '@hotwired/stimulus'
 
 /**
- * @classdesc Controller that manages presentation attachment inputs.
+ * @classdesc Controller that manages conference event inputs.
  */
 export default class extends Controller {
   // noinspection JSUnusedGlobalSymbols
