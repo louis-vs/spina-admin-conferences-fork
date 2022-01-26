@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'redis', '~> 4.2'
   spec.add_dependency 'spina', '~> 2.0.0'
   spec.add_dependency 'stimulus-rails', '~> 0.2.2'
-  spec.add_dependency 'turbo-rails', '~> 0.5.9'
+  spec.add_dependency 'turbo-rails', '>= 0.5.9', '< 1.1.0'
 
   spec.add_development_dependency 'capybara', '~> 3.33'
   spec.add_development_dependency 'dotenv-rails', '~> 2.7'
