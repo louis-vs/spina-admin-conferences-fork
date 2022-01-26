@@ -8,6 +8,18 @@ module Spina
       class Engine < ::Rails::Engine
         isolate_namespace Spina::Admin::Conferences
 
+        initializer 'spina.admin.conferences.assets' do
+          Spina.config.importmap.draw do
+            pin_all_from Spina::Admin::Conferences::Engine.root.join('app/assets/javascripts/spina/admin/conferences/controllers'), # rubocop:disable Layout/LineLength
+                         under: 'controllers', to: 'spina/admin/conferences/controllers'
+          end
+
+          Spina.config.tailwind_content.concat(["#{Spina::Admin::Conferences::Engine.root}/app/views/**/*.*",
+                                                "#{Spina::Admin::Conferences::Engine.root}/app/components/**/*.*",
+                                                "#{Spina::Admin::Conferences::Engine.root}/app/helpers/**/*.*",
+                                                "#{Spina::Admin::Conferences::Engine.root}/app/assets/javascripts/**/*.js"])
+        end
+
         config.before_initialize do
           ::Spina::Plugin.register do |plugin|
             plugin.name = 'conferences'
