@@ -78,7 +78,7 @@ module Spina
 
         # Destroys a conference.
         # @return [void]
-        def destroy # rubocop:disable Metrics/MethodLength
+        def destroy
           if @conference.destroy
             redirect_to admin_conferences_conferences_path, success: t('.destroyed')
           else

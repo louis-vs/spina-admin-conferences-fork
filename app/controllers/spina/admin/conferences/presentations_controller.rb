@@ -60,7 +60,7 @@ module Spina
 
         # Destroys a presentation.
         # @return [void]
-        def destroy # rubocop:disable Metrics/MethodLength
+        def destroy
           if @presentation.destroy
             redirect_to admin_conferences_presentations_path, success: t('.destroyed')
           else

@@ -59,7 +59,7 @@ module Spina
 
         # Destroys a room.
         # @return [void]
-        def destroy # rubocop:disable Metrics/MethodLength
+        def destroy
           if @room.destroy
             redirect_to admin_conferences_rooms_path, success: t('.destroyed')
           else

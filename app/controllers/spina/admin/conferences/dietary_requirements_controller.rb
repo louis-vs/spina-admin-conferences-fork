@@ -59,7 +59,7 @@ module Spina
 
         # Destroys a dietary requirement.
         # @return [void]
-        def destroy # rubocop:disable Metrics/MethodLength
+        def destroy
           if @dietary_requirement.destroy
             redirect_to admin_conferences_dietary_requirements_path, success: t('.destroyed')
           else

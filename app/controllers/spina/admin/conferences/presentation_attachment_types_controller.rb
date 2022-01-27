@@ -58,7 +58,7 @@ module Spina
 
         # Destroys a presentation attachment type.
         # @return [void]
-        def destroy # rubocop:disable Metrics/MethodLength
+        def destroy
           if @presentation_attachment_type.destroy
             redirect_to admin_conferences_presentation_attachment_types_path, success: t('.destroyed')
           else

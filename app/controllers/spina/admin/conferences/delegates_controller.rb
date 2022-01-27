@@ -59,7 +59,7 @@ module Spina
 
         # Destroys a delegate.
         # @return [void]
-        def destroy # rubocop:disable Metrics/MethodLength
+        def destroy
           if @delegate.destroy
             redirect_to admin_conferences_delegates_path, success: t('.destroyed')
           else

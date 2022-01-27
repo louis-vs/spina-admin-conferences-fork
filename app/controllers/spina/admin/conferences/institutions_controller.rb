@@ -59,7 +59,7 @@ module Spina
 
         # Destroys an institution.
         # @return [void]
-        def destroy # rubocop:disable Metrics/MethodLength
+        def destroy
           if @institution.destroy
             redirect_to admin_conferences_institutions_path, success: t('.destroyed')
           else
