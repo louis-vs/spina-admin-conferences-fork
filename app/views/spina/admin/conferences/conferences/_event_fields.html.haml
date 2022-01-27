@@ -1,31 +1,24 @@
-.structure-form-pane{ class: ('active' if (local_assigns[:active] == true) || (f.index == 0)), id: "structure_form_pane_#{f.index}",
-                      data: { 'spina--admin--conferences--conference_events_form': { target: 'formPane' } } }
-  .structure-form-part
-    .page-form-label= Spina::Admin::Conferences::Event.human_attribute_name :name
-    .page-form-control= f.text_field :name, placeholder: Spina::Admin::Conferences::Event.human_attribute_name(:name), required: true
-
-  .structure-form-part
-    .page-form-label= Spina::Admin::Conferences::Event.human_attribute_name :start_datetime
-    .page-form-control= f.datetime_field :start_datetime,
-                              placeholder: Spina::Admin::Conferences::Event.human_attribute_name(:start_datetime), required: true
-
-  .structure-form-part
-    .page-form-label= Spina::Admin::Conferences::Event.human_attribute_name :finish_datetime
-    .page-form-control= f.datetime_field :finish_datetime,
-                              placeholder: Spina::Admin::Conferences::Event.human_attribute_name(:finish_datetime), required: true
-
-  .structure-form-part
-    .page-form-label= Spina::Admin::Conferences::Event.human_attribute_name :location
-    .page-form-control= f.text_field :location, placeholder: Spina::Admin::Conferences::Event.human_attribute_name(:location),
-                        required: true
-
-  .structure-form-part
-    .page-form-label= Spina::Admin::Conferences::Event.human_attribute_name :description
-    .page-form-content
-      .page-form-rich-text= f.rich_text_area :description
-
+%div{ data: { 'part-id': "#{f.object.object_id}", 'tabs-target': 'pane' }, id: "pane_#{f.object.object_id}" }
   = f.hidden_field :id
 
-  = f.hidden_field :_destroy, data: { 'spina--admin--conferences--conference_events_form_target': 'destroyField' }
-  = button_tag t('spina.delete'), type: 'button', class: %w[button button-mini button-link pull-right],
-               data: { action: 'spina--admin--conferences--conference-events-form#removeForm' }
+  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Event.human_attribute_name(:name)) do
+    = render Spina::Forms::TextFieldComponent.new(f, :name)
+  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Event.human_attribute_name(:start_datetime)) do
+    = f.datetime_field :start_datetime
+  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Event.human_attribute_name(:finish_datetime)) do
+    = f.datetime_field :finish_datetime
+  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Event.human_attribute_name(:location)) do
+    = render Spina::Forms::TextFieldComponent.new(f, :location)
+
+  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Event.human_attribute_name(:description)) do
+    .mt-1.relative
+      = f.hidden_field :description, id: "#{f.object.object_id}_input"
+
+      .relative.form-textarea.p-4.pt-0.shadow-sm.max-w-5xl(data-controller='trix' id="insert_#{f.object.object_id}_trix-toolbar" data-action='media-picker:done->trix#insertAttachment')
+        = render Spina::Forms::TrixToolbarComponent.new("#{f.object.object_id}_trix-toolbar")
+
+        %trix-editor(class='prose prose-sm focus:outline-none max-w-3xl xl:border-r border-dashed border-gray-200 pr-3' toolbar="#{f.object.object_id}_trix-toolbar" input="#{f.object.object_id}_input" data-trix-target='editor' data-action='trix-file-accept->trix#preventDefault')
+
+  .text-right
+    = button_tag t('spina.ui.delete'), type: :button, class: 'btn btn-default bg-transparent hover:bg-white hover:text-red-500 h-8 px-3 inline-block mt-3', data: { action: 'repeater#removeFields', id: "pane_#{f.object.object_id}" }
+
