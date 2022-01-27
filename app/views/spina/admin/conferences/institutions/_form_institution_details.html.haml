@@ -1,29 +1,46 @@
-.page-form
-  .page-form-group
-    .page-form-label= Spina::Admin::Conferences::Institution.human_attribute_name :name
-    .page-form-control= f.text_field :name, placeholder: Spina::Admin::Conferences::Institution.human_attribute_name(:name), required: true, class: 'input-large'
+= form_with model: [spina, :admin_conferences, @institution], id: dom_id(@institution), html: { autocomplete: 'off' } do |f|
+  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Institution.human_attribute_name(:name)) do
+    = render Spina::Forms::TextFieldComponent.new(f, :name)
+  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Institution.human_attribute_name(:city)) do
+    = render Spina::Forms::TextFieldComponent.new(f, :city)
 
-  .page-form-group
-    .page-form-label= Spina::Admin::Conferences::Institution.human_attribute_name :city
-    .page-form-control= f.text_field :city, placeholder: Spina::Admin::Conferences::Institution.human_attribute_name(:city), required: true
 
-  .page-form-group
-    .page-form-label= Spina::Admin::Conferences::Institution.human_attribute_name :logo
-    .page-form-content{ data: { controller: 'image-form' } }
-      .page-form-media-picker
-        %div{ style: 'width: 100%' }
-          = link_to admin_media_picker_path(selected_ids: [f.object.logo_id], input: "media_picker_#{f.object.object_id}", mode: 'single'), remote: true, class: 'image', data: { target: 'image-form.image' } do
-            .page-form-media-picker-placeholder= t 'spina.images.choose_image'
-            %div{ id: "media_picker_#{f.object.object_id}" }
-              = f.hidden_field :logo_id, data: { target: 'image-form.imageId' }
-              = f.hidden_field :logo_signed_blob_id, value: f.object.logo&.file&.signed_id, data: {target: 'image-form.signedBlobId'}
-              = f.hidden_field :logo_filename, value: f.object.logo&.file&.filename, data: {target: 'image-form.filename'}
-            %div{ style: 'width: 200px; height: 150px; overflow: hidden' }
-              - if f.object.logo.present?
-                = image_tag main_app.url_for(f.object.logo.variant(resize: '400x300^', crop: '400x300+0+0')), width: 200, height: 150
+  %div(class="mt-6 relative" data-controller="media-picker unique-id" data-unique-id="#{dom_id(f.object, f.object.object_id)}" data-action="media-picker:done->media-picker#handleDone")
+    %label(class="block text-sm leading-5 font-medium text-gray-700")
+      = Spina::Admin::Conferences::Institution.human_attribute_name :logo
 
-        = button_tag type: :default, class: 'button button-small button-default', data: { action: 'image-form#remove' } do
-          %i.icon.icon-cross{ style: 'margin: 0; font-size: 10px' }
+    = f.hidden_field :logo_signed_blob_id, data: { media_picker_target: 'signedBlobId' }
+    = f.hidden_field :logo_filename, data: { media_picker_target: 'filename' }
+    = f.hidden_field :logo_id, data: { media_picker_target: 'imageId' }
 
-- unless @institution.new_record?
-  .pull-right= link_to t('spina.permanently_delete'), admin_conferences_institution_path(@institution), method: :delete, data: { confirm: t('.delete_confirmation', institution: @institution.name) }, class: %w[button button-link button-danger]
+    %button(class="absolute mt-3 ml-2 z-10 cursor-pointer flex items-center h-9 px-2 rounded-md bg-gray-700 bg-opacity-50 border-gray-300 active:shadow-inner text-gray-200 hover:text-white text-sm font-medium leading-none leading-none shadow-sm" data-action="media-picker#removeImage" data-media-picker-target="clearButton" type="button")
+      %svg(class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor")
+        %path(stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16")
+    
+    = link_to spina.admin_media_picker_path(target: dom_id(f.object, f.object.object_id)), class: "block relative mt-1 w-full", data: {turbo_frame: "modal"} do
+      %div{class:"w-36 h-36 bg-transparent border-2 border-dashed border-gray-300 rounded-lg flex items-center flex-col justify-center"}
+        %svg.mx-auto.h-12.w-12.text-gray-400{ stroke: 'currentColor', fill:'none', viewBox: '0 0 48 48' }
+          %path{d: 'M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02', 'stroke-width': '2', 'stroke-linecap': 'round', 'stroke-linejoin': 'round'}
+        .text-gray-400.font-medium.text-sm= t 'spina.images.choose_image'
+      
+      %div(class="border absolute inset-0 w-36 h-36 bg-gray-100 rounded-lg shadow-md overflow-hidden" data-media-picker-target="thumbnail")
+        - if f.object.logo.present?
+          = image_tag thumbnail_url(f.object.logo), class: 'object-contain h-36 w-full', data: { controller: 'image-fade-in' }
+
+-#.page-form-group
+  .page-form-label= Spina::Admin::Conferences::Institution.human_attribute_name :logo
+  .page-form-content{ data: { controller: 'image-form' } }
+    .page-form-media-picker
+      %div{ style: 'width: 100%' }
+        = link_to admin_media_picker_path(selected_ids: [f.object.logo_id], input: "media_picker_#{f.object.object_id}", mode: 'single'), remote: true, class: 'image', data: { target: 'image-form.image' } do
+          .page-form-media-picker-placeholder= t 'spina.images.choose_image'
+          %div{ id: "media_picker_#{f.object.object_id}" }
+            = f.hidden_field :logo_id, data: { target: 'image-form.imageId' }
+            = f.hidden_field :logo_signed_blob_id, value: f.object.logo&.file&.signed_id, data: {target: 'image-form.signedBlobId'}
+            = f.hidden_field :logo_filename, value: f.object.logo&.file&.filename, data: {target: 'image-form.filename'}
+          %div{ style: 'width: 200px; height: 150px; overflow: hidden' }
+            - if f.object.logo.present?
+              = image_tag main_app.url_for(f.object.logo.variant(resize: '400x300^', crop: '400x300+0+0')), width: 200, height: 150
+
+      = button_tag type: :default, class: 'button button-small button-default', data: { action: 'image-form#remove' } do
+        %i.icon.icon-cross{ style: 'margin: 0; font-size: 10px' }

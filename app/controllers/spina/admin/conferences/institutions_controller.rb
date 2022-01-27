@@ -39,13 +39,9 @@ module Spina
           if @institution.save
             redirect_to admin_conferences_institutions_path, success: t('.saved')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb t('.new')
-                render :new
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @institution.errors } }
-            end
+            add_breadcrumb t('.new')
+            flash.now[:alert] = t('.failed')
+            render :new, status: :unprocessable_entity
           end
         end
 
