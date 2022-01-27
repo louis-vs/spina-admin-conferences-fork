@@ -63,13 +63,9 @@ module Spina
           if @presentation_type.destroy
             redirect_to admin_conferences_presentation_types_path, success: t('.destroyed')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb @presentation_type.name
-                render :edit
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @presentation_type.errors } }
-            end
+            add_breadcrumb @presentation_type.name
+            flash.now[:alert] = t('.failed')
+            render :edit, status: :unprocessable_entity
           end
         end
 

@@ -63,13 +63,9 @@ module Spina
           if @dietary_requirement.destroy
             redirect_to admin_conferences_dietary_requirements_path, success: t('.destroyed')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb @dietary_requirement.name
-                render :edit
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @dietary_requirement.errors } }
-            end
+            add_breadcrumb @dietary_requirement.name
+            flash.now[:alert] = t('.failed')
+            render :edit, status: :unprocessable_entity
           end
         end
 

@@ -63,13 +63,9 @@ module Spina
           if @delegate.destroy
             redirect_to admin_conferences_delegates_path, success: t('.destroyed')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb @delegate.full_name
-                render :edit
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @delegate.errors } }
-            end
+            add_breadcrumb @delegate.name
+            flash.now[:alert] = t('.failed')
+            render :edit, status: :unprocessable_entity
           end
         end
 

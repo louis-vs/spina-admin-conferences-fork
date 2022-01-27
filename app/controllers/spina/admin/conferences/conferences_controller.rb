@@ -82,13 +82,9 @@ module Spina
           if @conference.destroy
             redirect_to admin_conferences_conferences_path, success: t('.destroyed')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb @conference.name
-                render :edit
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @conference.errors } }
-            end
+            add_breadcrumb @conference.name
+            flash.now[:alert] = t('.failed')
+            render :edit, status: :unprocessable_entity
           end
         end
 
