@@ -17,7 +17,8 @@ module Spina
           Spina.config.tailwind_content.concat(["#{Spina::Admin::Conferences::Engine.root}/app/views/**/*.*",
                                                 "#{Spina::Admin::Conferences::Engine.root}/app/components/**/*.*",
                                                 "#{Spina::Admin::Conferences::Engine.root}/app/helpers/**/*.*",
-                                                "#{Spina::Admin::Conferences::Engine.root}/app/assets/javascripts/**/*.js"])
+                                                "#{Spina::Admin::Conferences::Engine.root}/app/assets/javascripts/**/*.js",
+                                                "#{Spina::Admin::Conferences::Engine.root}/app/**/application.tailwind.css"])
         end
 
         config.before_initialize do
