@@ -33,7 +33,7 @@ module Spina
 
         # Creates an institution.
         # @return [void]
-        def create # rubocop:disable Metrics/MethodLength
+        def create
           @institution = Institution.new(conference_params)
 
           if @institution.save
@@ -47,7 +47,7 @@ module Spina
 
         # Updates an institution.
         # @return [void]
-        def update # rubocop:disable Metrics/MethodLength
+        def update
           if @institution.update(conference_params)
             redirect_to admin_conferences_institutions_path, success: t('.saved')
           else

@@ -33,7 +33,7 @@ module Spina
 
         # Creates a room.
         # @return [void]
-        def create # rubocop:disable Metrics/MethodLength
+        def create
           @room = Room.new(room_params)
 
           if @room.save
@@ -47,7 +47,7 @@ module Spina
 
         # Updates a room.
         # @return [void]
-        def update # rubocop:disable Metrics/MethodLength
+        def update
           if @room.update(room_params)
             redirect_to admin_conferences_rooms_path, success: t('.saved')
           else

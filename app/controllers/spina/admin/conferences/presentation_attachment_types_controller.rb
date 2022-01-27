@@ -32,7 +32,7 @@ module Spina
 
         # Creates a presentation attachment type.
         # @return [void]
-        def create # rubocop:disable Metrics/MethodLength
+        def create
           @presentation_attachment_type = PresentationAttachmentType.new presentation_attachment_type_params
 
           if @presentation_attachment_type.save
@@ -46,7 +46,7 @@ module Spina
 
         # Updates a presentation attachment type.
         # @return [void]
-        def update # rubocop:disable Metrics/MethodLength
+        def update
           if @presentation_attachment_type.update(presentation_attachment_type_params)
             redirect_to admin_conferences_presentation_attachment_types_path, success: t('.saved')
           else

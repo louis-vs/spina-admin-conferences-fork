@@ -34,7 +34,7 @@ module Spina
 
         # Creates a presentation.
         # @return [void]
-        def create # rubocop:disable Metrics/MethodLength
+        def create
           @presentation = Presentation.new presentation_params
 
           if @presentation.save
@@ -48,7 +48,7 @@ module Spina
 
         # Updates a presentation.
         # @return [void]
-        def update # rubocop:disable Metrics/MethodLength
+        def update
           if @presentation.update(presentation_params)
             redirect_to admin_conferences_presentations_path, success: t('.saved')
           else

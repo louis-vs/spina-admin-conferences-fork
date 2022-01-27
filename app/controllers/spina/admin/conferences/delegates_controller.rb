@@ -33,7 +33,7 @@ module Spina
 
         # Creates a delegate.
         # @return [void]
-        def create # rubocop:disable Metrics/MethodLength
+        def create
           @delegate = Delegate.new(delegate_params)
 
           if @delegate.save
@@ -47,7 +47,7 @@ module Spina
 
         # Updates a delegate.
         # @return [void]
-        def update # rubocop:disable Metrics/MethodLength
+        def update
           if @delegate.update(delegate_params)
             redirect_to admin_conferences_delegates_path, success: t('.saved')
           else

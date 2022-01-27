@@ -33,7 +33,7 @@ module Spina
 
         # Creates a dietary requirement.
         # @return [void]
-        def create # rubocop:disable Metrics/MethodLength
+        def create
           @dietary_requirement = DietaryRequirement.new dietary_requirement_params
 
           if @dietary_requirement.save
@@ -47,7 +47,7 @@ module Spina
 
         # Updates a dietary requirement.
         # @return [void]
-        def update # rubocop:disable Metrics/MethodLength
+        def update
           if @dietary_requirement.update(dietary_requirement_params)
             redirect_to admin_conferences_dietary_requirements_path, success: t('.saved')
           else

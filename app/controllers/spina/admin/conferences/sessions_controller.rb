@@ -34,7 +34,7 @@ module Spina
 
         # Creates a session.
         # @return [void]
-        def create # rubocop:disable Metrics/MethodLength
+        def create
           @session = Session.new(session_params)
 
           if @session.save
@@ -48,7 +48,7 @@ module Spina
 
         # Updates a session.
         # @return [void]
-        def update # rubocop:disable Metrics/MethodLength
+        def update
           if @session.update(session_params)
             redirect_to admin_conferences_sessions_path, success: t('.saved')
           else

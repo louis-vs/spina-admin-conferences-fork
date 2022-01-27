@@ -52,7 +52,7 @@ module Spina
 
         # Creates a conference.
         # @return [void]
-        def create # rubocop:disable Metrics/MethodLength
+        def create
           @conference = Conference.new(conference_params)
 
           if @conference.save
@@ -66,7 +66,7 @@ module Spina
 
         # Updates a conference.
         # @return [void]
-        def update # rubocop:disable Metrics/MethodLength
+        def update
           if @conference.update(conference_params)
             redirect_to admin_conferences_conferences_path, success: t('.saved')
           else
