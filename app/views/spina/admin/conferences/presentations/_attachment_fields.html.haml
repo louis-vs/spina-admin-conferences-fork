@@ -1,18 +1,12 @@
-.structure-form-pane{ class: ('active' if (local_assigns[:active] == true) || (f.index == 0)), id: "structure_form_pane_#{f.index}", data: { 'presentation_attachments_form': { target: 'formPane' } } }
-  .structure-form-part
-    .page-form-label
-      = Spina::Admin::Conferences::PresentationAttachment.human_attribute_name :attachment_type
-    .page-form-control
-      .select-dropdown
-        = f.collection_select :attachment_type_id, Spina::Admin::Conferences::PresentationAttachmentType.all, :id, :name, {}, data: { action: 'presentation-attachments-form#updateType' }
-  .structure-form-part
-    .page-form-label
-      = Spina::Admin::Conferences::PresentationAttachment.human_attribute_name :attachment
-    .page-form-content{ data: { controller: "attachment-picker" } }
-      .select-dropdown
-        = f.collection_select :attachment_id, Spina::Attachment.sorted, :id, :name, { include_blank: t("spina.attachments.choose_attachment") }
-
+%div{ data: { 'part-id': "#{f.object.object_id}", 'tabs-target': 'pane' }, id: "pane_#{f.object.object_id}" }
   = f.hidden_field :id
 
-  = f.hidden_field :_destroy, data: { 'presentation_attachments_form_target': 'destroyField' }
-  = button_tag t('spina.delete'), type: 'button', class: %w[button button-mini button-link pull-right], data: { action: 'presentation-attachments-form#removeForm' }
+  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::PresentationAttachment.human_attribute_name(:attachment_type)) do
+    = f.collection_select :attachment_type_id, Spina::Admin::Conferences::PresentationAttachmentType.all, :id, :name
+
+  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::PresentationAttachment.human_attribute_name(:attachment)) do
+    .mt-6{ data: { controller: 'attachment-picker' } }
+      = f.collection_select :attachment_id, Spina::Attachment.sorted, :id, :name, { include_blank: t('spina.attachments.choose_attachment') }, { class: 'form-select mt-1', data: { action: 'attachment-picker#pick' } }
+
+  .text-right
+    = button_tag t('spina.ui.delete'), type: :button, class: 'btn btn-default bg-transparent hover:bg-white hover:text-red-500 h-8 px-3 inline-block mt-3', data: { action: 'repeater#removeFields', id: "pane_#{f.object.object_id}" }

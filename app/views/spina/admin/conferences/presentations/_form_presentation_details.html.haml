@@ -1,41 +1,59 @@
-%div{ data: { controller: 'select-options', select_options: { record_value: @conferences } } }
-  = form_with model: [spina, :admin_conferences, @presentation], id: dom_id(@presentation), html: { autocomplete: 'off' } do |f|
+= form_with model: [spina, :admin_conferences, @presentation], id: dom_id(@presentation), html: { autocomplete: 'off' } do |f|
+  %div{ data: { controller: 'select-options', select_options: { record_value: @conferences } } }
     = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:conference)) do
       = select_tag :conference_id, options_from_collection_for_select(Spina::Admin::Conferences::Conference.all, :id, :name, (@presentation.conference.id unless @presentation.conference.blank?)), include_blank: true, required: true, data: { action: 'spina--admin--conferences--select-options#setVisibility', 'spina--admin--conferences--select_options_target': 'select', text_key: 'name' }
     = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:presentation_type)) do
       = select_tag :presentation_type_id, options_from_collection_for_select((@presentation.conference || Spina::Admin::Conferences::Conference.first).presentation_types, :id, :name, (@presentation.presentation_type.id unless @presentation.presentation_type.blank?)), include_blank: true, required: true, data: { action: 'spina--admin--conferences--select-options#setVisibility','spina--admin--conferences--select_options_target': 'select', key_path: 'presentation_types', text_key: 'name' }
     = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:session)) do
       = f.collection_select :session_id, (@presentation.presentation_type || Spina::Admin::Conferences::Conference.first).sessions, :id, :name, { include_blank: true }, required: true, data: {'spina--admin--conferences--select_options_target': 'select', key_path: 'presentation_types:sessions', text_key: 'name' }
-    = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:start_datetime)) do
-      = f.datetime_field :start_datetime
-    = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:title)) do
-      = render Spina::Forms::TextFieldComponent.new(f, :title)
 
-    = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:abstract)) do
-      .mt-1.relative
-        = f.hidden_field :abstract, id: "#{f.object.object_id}_input"
+  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:start_datetime)) do
+    = f.datetime_field :start_datetime
+  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:title)) do
+    = render Spina::Forms::TextFieldComponent.new(f, :title)
 
-        .relative.form-textarea.p-4.pt-0.shadow-sm.max-w-5xl(data-controller='trix' id="insert_#{f.object.object_id}_trix-toolbar" data-action='media-picker:done->trix#insertAttachment')
-          = render Spina::Forms::TrixToolbarComponent.new("#{f.object.object_id}_trix-toolbar")
+  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:abstract)) do
+    .mt-1.relative
+      = f.hidden_field :abstract, id: "#{f.object.object_id}_input"
 
-          %trix-editor(class='prose prose-sm focus:outline-none max-w-3xl xl:border-r border-dashed border-gray-200 pr-3' toolbar="#{f.object.object_id}_trix-toolbar" input="#{f.object.object_id}_input" data-trix-target='editor' data-action='trix-file-accept->trix#preventDefault')
+      .relative.form-textarea.p-4.pt-0.shadow-sm.max-w-5xl(data-controller='trix' id="insert_#{f.object.object_id}_trix-toolbar" data-action='media-picker:done->trix#insertAttachment')
+        = render Spina::Forms::TrixToolbarComponent.new("#{f.object.object_id}_trix-toolbar")
 
-    = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:presenters)) do
-      %table.table{ style: 'margin: 0' }
-        %tbody
-          = f.collection_check_boxes :presenter_ids, Spina::Admin::Conferences::Delegate.order(:last_name, :first_name), :id, :reversed_name_and_institution do |builder|
-            %tr
-              %td{ style: "padding-left: 16px" }
-                .form-checkbox
-                  = builder.check_box
-                  = builder.label
+        %trix-editor(class='prose prose-sm focus:outline-none max-w-3xl xl:border-r border-dashed border-gray-200 pr-3' toolbar="#{f.object.object_id}_trix-toolbar" input="#{f.object.object_id}_input" data-trix-target='editor' data-action='trix-file-accept->trix#preventDefault')
 
-    %div{ class: dom_class(@presentation.attachments) }
-      = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:attachments)) do
-        %div{ data: { controller: 'presentation-attachments-form', 'presentation_attachments_form': { active_class: 'active' } } }
-          %ul= render partial: 'attachment_row', collection: f.object.attachments, as: :attachment
-          = link_to 'plus', @presentation.new_record? ? new_admin_conferences_presentation_attachment_path : new_admin_conferences_presentation_presentation_attachment_path(@presentation, index: @presentation.attachments.size), remote: true, class: %w[button button-link icon], data: { 'presentation_attachments_form_target': 'addFormLink', disable_with: '&#xF12C;' }
-        %div{ data: { action: 'presentationAttachmentFieldsAdded->presentation-attachments-form#updateURL' } }
-          = f.fields_for :attachments do |attachment_fields|
-            = render 'attachment_fields', f: attachment_fields
+  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:presenters)) do
+    %table.table{ style: 'margin: 0' }
+      %tbody
+        = f.collection_check_boxes :presenter_ids, Spina::Admin::Conferences::Delegate.order(:last_name, :first_name), :id, :reversed_name_and_institution do |builder|
+          %tr
+            %td{ style: "padding-left: 16px" }
+              .form-checkbox
+                = builder.check_box
+                = builder.label
 
+
+  .mt-6{ 'data-controller': 'repeater' }
+    %label.block.text-sm.leading-5.font-medium.text-gray-700= Spina::Admin::Conferences::Presentation.human_attribute_name :attachments
+    .-mt-4.flex.flex-col.md:flex-row{ data: { 'controller': 'tabs', 'tabs-active': 'bg-spina-dark bg-opacity-10 text-gray-900', 'tabs-inactive': 'text-gray-500' }  }
+      .md:w-64.md:pr-6
+
+        -# Fields for new attachment
+        - new_attachment = Spina::Admin::Conferences::PresentationAttachment.new
+        - fields = f.fields_for(:attachments, [new_attachment], child_index: new_attachment.object_id) { |ff| render('attachment_fields', f: ff) }.gsub('\n', '')
+
+        -# Tabs
+        .pt-6.-ml-3
+          %div{ data: { action: 'exists->tabs#added', 'repeater-target' => 'list', 'tabs-target' => 'list' } }
+            - (f.object.attachments || []).each.with_index do |attachment, index|
+              %button.text-gray-500.hover:text-gray-900.rounded-md.px-3.truncate.text-sm.font-medium.flex.items-center.w-full.h-9{ data: { 'action': 'tabs#show', 'pane-id': "pane_#{attachment.object_id}", 'repeater-target': 'listItem', 'tabs-target': 'button' }, type: 'button' }
+                %svg.w-4.h-4.mr-2{ fill: 'currentColor', viewbox: '0 0 448 512', xmlns: 'http://www.w3.org/2000/svg' }
+                  %path{ d: 'M432 288H16c-8.8 0-16 7.2-16 16v16c0 8.8 7.2 16 16 16h416c8.8 0 16-7.2 16-16v-16c0-8.8-7.2-16-16-16zm0-112H16c-8.8 0-16 7.2-16 16v16c0 8.8 7.2 16 16 16h416c8.8 0 16-7.2 16-16v-16c0-8.8-7.2-16-16-16z' }
+                = attachment&.attachment_type.name
+          %button.text-gray-400.pl-2.hover:text-gray-900.rounded-md.truncate.text-sm.font-medium.flex.items-center.w-full.h-10{ data: { 'action': 'repeater#addFields', 'child-index': "#{new_attachment.object_id}", 'fields': fields }, type: 'button' }
+            = heroicon 'plus', style: :solid, class: 'w-6 h-6 mr-1' 
+            = t 'spina.ui.new_entry'
+
+      -# Content
+      .flex-1.pl-6.md:pl-0{ 'data-repeater-target': 'content' }
+        = f.fields_for :attachments do |attachment_fields|
+          = render 'attachment_fields', f: attachment_fields
