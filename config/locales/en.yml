@@ -52,10 +52,13 @@ en:
           create:
             new: New conference
             saved: Conference saved
+            failed: Failed to save conference! Check the form for missing or invalid fields.
           update:
             saved: Conference saved
+            failed: Failed to save conference! Check the form for missing or invalid fields.
           destroy:
             destroyed: Conference deleted
+            failed: Failed to delete conference. Make sure to delete all dependent records first.
           form:
             save: Save conference
             conference_details: Conference details
@@ -64,9 +67,8 @@ en:
             presentations: Presentations
             presentation_types: Presentation types
             rooms: Rooms
-          form_conference_details:
             delete_confirmation:
-              "Are you sure you want to delete the conference <strong>%{name}</strong>?"
+              "Are you sure you want to delete the conference <strong>%{conference}</strong>?"
         delegates:
           index:
             new: New delegate
@@ -76,16 +78,18 @@ en:
           create:
             new: New delegate
             saved: Delegate saved
+            failed: Failed to save delegate! Check the form for missing or invalid fields.
           update:
             saved: Delegate saved
+            failed: Failed to save delegate! Check the form for missing or invalid fields.
           destroy:
             destroyed: Delegate deleted
+            failed: Failed to delete delegate. Make sure to delete all dependent records first.
           form:
             save: Save delegate
             delegate_details: Delegate details
             conferences: Conferences
             presentations: Presentations
-          form_delegate_details:
             delete_confirmation: "Are you sure you want to delete the delegate <strong>%{delegate}</strong>?"
         presenters:
           new: New presenter
@@ -104,15 +108,17 @@ en:
           create:
             new: New presentation
             saved: Presentation saved
+            failed: Failed to save presentation! Check the form for missing or invalid fields.
           update:
             saved: Presentation saved
+            failed: Failed to save presentation! Check the form for missing or invalid fields.
           destroy:
             destroyed: Presentation deleted
+            failed: Failed to delete presentation. Make sure to delete all dependent records first.
           form:
             save: Save presentation
             presentation_details: Presentation details
             presenters: Presenters
-          form_presentation_details:
             delete_confirmation: "Are you sure you want to delete the presentation <strong>%{presentation}</strong>?"
         presentation_types:
           index:
@@ -123,16 +129,18 @@ en:
           create:
             new: New presentation type
             saved: Presentation type saved
+            failed: Failed to save presentation type! Check the form for missing or invalid fields.
           update:
             saved: Presentation type saved
+            failed: Failed to save presentation type! Check the form for missing or invalid fields.
           destroy:
             destroyed: Presentation type deleted
+            failed: Failed to delete presentation type. Make sure to delete all dependent records first.
           form:
             save: Save presentation type
             presentation_type_details: Presentation type details
             presentations: Presentations
             sessions: Sessions
-          form_presentation_type_details:
             delete_confirmation:
               "Are you sure you want to delete the presentation type <strong>%{presentation_type}</strong>?"
         dietary_requirements:
@@ -144,15 +152,17 @@ en:
           create:
             new: New dietary requirement
             saved: Dietary requirement saved
+            failed: Failed to save dietary requirement! Check the form for missing or invalid fields.
           update:
             saved: Dietary requirement saved
+            failed: Failed to save dietary requirement! Check the form for missing or invalid fields.
           destroy:
             destroyed: Dietary requirement deleted
+            failed: Failed to delete dietary requirement. Make sure to delete all dependent records first.
           form:
             save: Save dietary requirement
             dietary_requirement_details: Dietary requirement details
             delegates: Delegates
-          form_dietary_requirement_details:
             delete_confirmation:
               "Are you sure you want to delete the dietary requirement <strong>%{dietary_requirement}</strong>?"
         presentation_attachment_types:
@@ -163,10 +173,13 @@ en:
           create:
             new: New presentation attachment type
             saved: Presentation attachment type saved
+            failed: Failed to save presentation attachment type! Check the form for missing or invalid fields.
           update:
             saved: Presentation attachment type saved
+            failed: Failed to save presentation attachment type! Check the form for missing or invalid fields.
           destroy:
             destroyed: Presentation attachment type deleted
+            failed: Failed to delete presentation attachment type. Make sure to delete all dependent records first.
           form:
             save: Save presentation attachment type
             delete_confirmation:
@@ -181,17 +194,19 @@ en:
           create:
             new: New institution
             saved: Institution saved
+            failed: Failed to save institution! Check the form for missing or invalid fields.
           update:
             saved: Institution saved
+            failed: Failed to save institution! Check the form for missing or invalid fields.
           destroy:
             destroyed: Institution deleted
+            failed: Failed to delete institution. Make sure to delete all dependent records first.
           form:
             save: Save institution
             institution_details: Institution details
             rooms: Rooms
             conferences: Conferences
             delegates: Delegates
-          form_institution_details:
             delete_confirmation: "Are you sure you want to delete the institution <strong>%{institution}</strong>?"
         rooms:
           index:
@@ -202,15 +217,17 @@ en:
           create:
             new: New room
             saved: Room saved
+            failed: Failed to save room! Check the form for missing or invalid fields.
           update:
             saved: Room saved
+            failed: Failed to save room! Check the form for missing or invalid fields.
           destroy:
             destroyed: Room deleted
+            failed: Failed to delete room. Make sure to delete all dependent records first.
           form:
             save: Save room
             room_details: Room details
             presentations: Presentations
-          form_room_details:
             delete_confirmation: "Are you sure you want to delete the room <strong>%{room}</strong>?"
         sessions:
           index:
@@ -220,15 +237,17 @@ en:
           create:
             new: New session
             saved: Session saved
+            failed: Failed to save session! Check the form for missing or invalid fields.
           update:
             saved: Session saved
+            failed: Failed to save session! Check the form for missing or invalid fields.
           destroy:
             destroyed: Session deleted
+            failed: Failed to delete session. Make sure to delete all dependent records first.
           form:
             save: Save session
             session_details: Session details
             presentations: Presentations
-          form_session_details:
             delete_confirmation: "Are you sure you want to delete the session <strong>%{session}</strong>?"
         application:
           conferences:
