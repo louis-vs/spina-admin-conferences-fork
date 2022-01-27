@@ -11,8 +11,6 @@ module Spina
         before_action :set_tabs
         before_action :set_conferences, :set_institutions, only: %i[new edit]
 
-        layout 'spina/admin/conferences/conferences'
-
         # @!group Actions
 
         # Renders a list of sessions.
@@ -36,51 +34,39 @@ module Spina
 
         # Creates a session.
         # @return [void]
-        def create # rubocop:disable Metrics/MethodLength
+        def create
           @session = Session.new(session_params)
 
           if @session.save
             redirect_to admin_conferences_sessions_path, success: t('.saved')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb t('.new')
-                render :new
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @session.errors } }
-            end
+            add_breadcrumb t('.new')
+            flash.now[:alert] = t('.failed')
+            render :new, status: :unprocessable_entity
           end
         end
 
         # Updates a session.
         # @return [void]
-        def update # rubocop:disable Metrics/MethodLength
+        def update
           if @session.update(session_params)
             redirect_to admin_conferences_sessions_path, success: t('.saved')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb @session.name
-                render :edit
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @session.errors } }
-            end
+            add_breadcrumb @session.name
+            flash.now[:alert] = t('.failed')
+            render :edit, status: :unprocessable_entity
           end
         end
 
         # Destroys a session.
         # @return [void]
-        def destroy # rubocop:disable Metrics/MethodLength
+        def destroy
           if @session.destroy
             redirect_to admin_conferences_sessions_path, success: t('.destroyed')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb @session.name
-                render :edit
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @session.errors } }
-            end
+            add_breadcrumb @session.name
+            flash.now[:alert] = t('.failed')
+            render :edit, status: :unprocessable_entity
           end
         end
 

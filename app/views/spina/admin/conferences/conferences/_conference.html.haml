@@ -1,9 +1,13 @@
-%tr{ data: { conference_id: conference.id } }
-  %td= link_to conference.name, edit_admin_conferences_conference_path(conference)
-  %td= conference.year
-  %td= time_tag conference.start_date, l(conference.start_date, format: :long)
-  %td= time_tag conference.finish_date, l(conference.finish_date, format: :long)
-  %td.align-right
-    = link_to edit_admin_conferences_conference_path(conference), class: %w[button button-small button-link] do
-      = icon 'pencil-outline'
-      = t 'spina.edit'
+%tr.border-b{ data: { conference_id: conference.id } }
+  %td= link_to conference.name, edit_admin_conferences_conference_path(conference), class: 'block text-spina font-medium text-sm p-4 hover:text-spina-dark'
+  %td
+    .block.font-light.text-sm.p-4= conference.year
+  %td
+    .block.font-light.text-sm.p-4= time_tag conference.start_date, l(conference.start_date, format: :long)
+  %td
+    .block.font-light.text-sm.p-4= time_tag conference.finish_date, l(conference.finish_date, format: :long)
+  %td
+    = link_to edit_admin_conferences_conference_path(conference), class: 'btn btn-default mx-4 w-max' do
+      .flex.flex-nowrap.items-center.px-8.py-1
+        = heroicon 'pencil-alt', style: :outline, class: 'w-4 h-4'
+        .ml-2= t 'spina.edit'

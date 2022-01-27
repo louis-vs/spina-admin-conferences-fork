@@ -33,51 +33,39 @@ module Spina
 
         # Creates a dietary requirement.
         # @return [void]
-        def create # rubocop:disable Metrics/MethodLength
+        def create
           @dietary_requirement = DietaryRequirement.new dietary_requirement_params
 
           if @dietary_requirement.save
             redirect_to admin_conferences_dietary_requirements_path, success: t('.saved')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb t('.new')
-                render :new
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @dietary_requirement.errors } }
-            end
+            add_breadcrumb t('.new')
+            flash.now[:alert] = t('.failed')
+            render :new, status: :unprocessable_entity
           end
         end
 
         # Updates a dietary requirement.
         # @return [void]
-        def update # rubocop:disable Metrics/MethodLength
+        def update
           if @dietary_requirement.update(dietary_requirement_params)
             redirect_to admin_conferences_dietary_requirements_path, success: t('.saved')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb @dietary_requirement.name
-                render :edit
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @dietary_requirement.errors } }
-            end
+            add_breadcrumb @dietary_requirement.name
+            flash.now[:alert] = t('.failed')
+            render :edit, status: :unprocessable_entity
           end
         end
 
         # Destroys a dietary requirement.
         # @return [void]
-        def destroy # rubocop:disable Metrics/MethodLength
+        def destroy
           if @dietary_requirement.destroy
             redirect_to admin_conferences_dietary_requirements_path, success: t('.destroyed')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb @dietary_requirement.name
-                render :edit
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @dietary_requirement.errors } }
-            end
+            add_breadcrumb @dietary_requirement.name
+            flash.now[:alert] = t('.failed')
+            render :edit, status: :unprocessable_entity
           end
         end
 

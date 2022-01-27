@@ -1,11 +1,10 @@
-.well
-  .table-container
-    %table.table
-      %thead
-        %tr
-          %th= Spina::Admin::Conferences::Presentation.human_attribute_name :conference
-          %th= Spina::Admin::Conferences::Presentation.human_attribute_name :title
-          %th= Spina::Admin::Conferences::Presentation.human_attribute_name :presenters
-          %th
+.my-6.md:m-8.bg-white.md:rounded-lg.border-l-0.border-r-0.border.md:border-r.md:border-l.border-gray-200.border-b-0.shadow-sm
+  %table.table-fixed.w-full
+    %thead
+      %tr.border-b.text-left
+        %th.font-semibold.text-sm.p-4= Spina::Admin::Conferences::Presentation.human_attribute_name :conference
+        %th.font-semibold.text-sm.p-4= Spina::Admin::Conferences::Presentation.human_attribute_name :title
+        %th.font-semibold.text-sm.p-4= Spina::Admin::Conferences::Presentation.human_attribute_name :presenters
+        %th
 
-      %tbody= render presentations.presence || 'empty_list', message: t('.no_presentations')
+    %tbody= render presentations.presence || 'empty_list', message: t('.no_presentations')

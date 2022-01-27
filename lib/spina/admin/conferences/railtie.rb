@@ -5,6 +5,7 @@ require 'spina/admin/conferences/migration/renaming'
 module Spina
   module Admin
     module Conferences
+      # Railtie for renaming some migrations to be more concise, if they were previously installed
       class Railtie < Rails::Railtie
         include Migration::Renaming
 

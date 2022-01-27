@@ -22,3 +22,6 @@ coverage/
 
 test/fixtures/files/delegates.csv
 test/fixtures/files/presentations.csv
+
+test/dummy/app/assets/builds/spina/tailwind.css
+test/dummy/app/assets/config/spina/tailwind.config.js

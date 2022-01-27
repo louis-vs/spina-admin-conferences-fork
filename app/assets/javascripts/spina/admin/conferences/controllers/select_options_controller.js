@@ -2,7 +2,7 @@
  * @external Controller
  * @see {@link https://stimulusjs.org}
  */
-import { Controller } from 'stimulus'
+import { Controller } from '@hotwired/stimulus'
 
 /**
  * @classdesc Controller that links related select elements.

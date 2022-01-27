@@ -10,8 +10,6 @@ module Spina
         before_action :set_breadcrumbs
         before_action :set_tabs
 
-        layout 'spina/admin/conferences/conferences'
-
         # @!group Actions
 
         # Renders a list of presentation types.
@@ -35,51 +33,39 @@ module Spina
 
         # Creates a presentation type.
         # @return [void]
-        def create # rubocop:disable Metrics/MethodLength
+        def create
           @presentation_type = PresentationType.new presentation_type_params
 
           if @presentation_type.save
             redirect_to admin_conferences_presentation_types_path, success: t('.saved')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb t('.new')
-                render :new
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @presentation_type.errors } }
-            end
+            add_breadcrumb t('.new')
+            flash.now[:alert] = t('.failed')
+            render :new, status: :unprocessable_entity
           end
         end
 
         # Updates a presentation type.
         # @return [void]
-        def update # rubocop:disable Metrics/MethodLength
+        def update
           if @presentation_type.update(presentation_type_params)
             redirect_to admin_conferences_presentation_types_path, success: t('.saved')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb @presentation_type.name
-                render :edit
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @presentation_type.errors } }
-            end
+            add_breadcrumb @presentation_type.name
+            flash.now[:alert] = t('.failed')
+            render :edit, status: :unprocessable_entity
           end
         end
 
         # Destroys a presentation type.
         # @return [void]
-        def destroy # rubocop:disable Metrics/MethodLength
+        def destroy
           if @presentation_type.destroy
             redirect_to admin_conferences_presentation_types_path, success: t('.destroyed')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb @presentation_type.name
-                render :edit
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @presentation_type.errors } }
-            end
+            add_breadcrumb @presentation_type.name
+            flash.now[:alert] = t('.failed')
+            render :edit, status: :unprocessable_entity
           end
         end
 

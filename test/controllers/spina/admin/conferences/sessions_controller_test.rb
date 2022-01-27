@@ -63,7 +63,7 @@ module Spina
           assert_no_difference 'Session.count' do
             post admin_conferences_sessions_url, params: { session: attributes }
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Session saved', flash[:success]
         end
 
@@ -73,7 +73,7 @@ module Spina
           assert_no_difference 'Session.count' do
             post admin_conferences_sessions_url, params: { session: attributes }, as: :turbo_stream
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Session saved', flash[:success]
         end
 
@@ -97,7 +97,7 @@ module Spina
           attributes = @invalid_session.attributes
           attributes[:name] = @invalid_session.name
           patch admin_conferences_session_url(@session), params: { session: attributes }
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Session saved', flash[:success]
         end
 
@@ -105,7 +105,7 @@ module Spina
           attributes = @invalid_session.attributes
           attributes[:name] = @invalid_session.name
           patch admin_conferences_session_url(@session), params: { session: attributes }, as: :turbo_stream
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Session saved', flash[:success]
         end
 
@@ -129,7 +129,7 @@ module Spina
           assert_no_difference 'Session.count' do
             delete admin_conferences_session_url(@session)
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Session deleted', flash[:success]
         end
 
@@ -137,7 +137,7 @@ module Spina
           assert_no_difference 'Session.count' do
             delete admin_conferences_session_url(@session), as: :turbo_stream
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Session deleted', flash[:success]
         end
       end

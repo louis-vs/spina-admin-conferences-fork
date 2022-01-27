@@ -34,51 +34,39 @@ module Spina
 
         # Creates a presentation.
         # @return [void]
-        def create # rubocop:disable Metrics/MethodLength
+        def create
           @presentation = Presentation.new presentation_params
 
           if @presentation.save
             redirect_to admin_conferences_presentations_path, success: t('.saved')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb t('.new')
-                render :new
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @presentation.errors } }
-            end
+            add_breadcrumb t('.new')
+            flash.now[:alert] = t('.failed')
+            render :new, status: :unprocessable_entity
           end
         end
 
         # Updates a presentation.
         # @return [void]
-        def update # rubocop:disable Metrics/MethodLength
+        def update
           if @presentation.update(presentation_params)
             redirect_to admin_conferences_presentations_path, success: t('.saved')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb @presentation.title
-                render :edit
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @presentation.errors } }
-            end
+            add_breadcrumb @presentation.name
+            flash.now[:alert] = t('.failed')
+            render :edit, status: :unprocessable_entity
           end
         end
 
         # Destroys a presentation.
         # @return [void]
-        def destroy # rubocop:disable Metrics/MethodLength
+        def destroy
           if @presentation.destroy
             redirect_to admin_conferences_presentations_path, success: t('.destroyed')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb @presentation.title
-                render :edit
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @presentation.errors } }
-            end
+            add_breadcrumb @presentation.name
+            flash.now[:alert] = t('.failed')
+            render :edit, status: :unprocessable_entity
           end
         end
 

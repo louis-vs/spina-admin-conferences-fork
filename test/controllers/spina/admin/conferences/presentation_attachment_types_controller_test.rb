@@ -58,7 +58,7 @@ module Spina
           assert_no_difference 'PresentationAttachmentType.count' do
             post admin_conferences_presentation_attachment_types_url, params: { presentation_attachment_type: attributes }
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Presentation attachment type saved', flash[:success]
         end
 
@@ -69,7 +69,7 @@ module Spina
             post admin_conferences_presentation_attachment_types_url,
                  params: { presentation_attachment_type: attributes }, as: :turbo_stream
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Presentation attachment type saved', flash[:success]
         end
 
@@ -96,7 +96,7 @@ module Spina
           attributes[:name] = @invalid_presentation_attachment_type.name
           patch admin_conferences_presentation_attachment_type_url(@presentation_attachment_type),
                 params: { presentation_attachment_type: attributes }
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Presentation attachment type saved', flash[:success]
         end
 
@@ -105,7 +105,7 @@ module Spina
           attributes[:name] = @invalid_presentation_attachment_type.name
           patch admin_conferences_presentation_attachment_type_url(@presentation_attachment_type),
                 params: { presentation_attachment_type: attributes }, as: :turbo_stream
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Presentation attachment type saved', flash[:success]
         end
 
@@ -131,7 +131,7 @@ module Spina
           assert_no_difference 'PresentationAttachmentType.count' do
             delete admin_conferences_presentation_attachment_type_url(@presentation_attachment_type)
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Presentation attachment type deleted', flash[:success]
           PresentationAttachmentType._destroy_callbacks = callbacks
         end
@@ -142,7 +142,7 @@ module Spina
           assert_no_difference 'PresentationAttachmentType.count' do
             delete admin_conferences_presentation_attachment_type_url(@presentation_attachment_type), as: :turbo_stream
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Presentation attachment type deleted', flash[:success]
           PresentationAttachmentType._destroy_callbacks = callbacks
         end

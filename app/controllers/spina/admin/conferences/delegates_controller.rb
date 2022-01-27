@@ -33,51 +33,39 @@ module Spina
 
         # Creates a delegate.
         # @return [void]
-        def create # rubocop:disable Metrics/MethodLength
+        def create
           @delegate = Delegate.new(delegate_params)
 
           if @delegate.save
             redirect_to admin_conferences_delegates_path, success: t('.saved')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb t('.new')
-                render :new
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @delegate.errors } }
-            end
+            add_breadcrumb t('.new')
+            flash.now[:alert] = t('.failed')
+            render :new, status: :unprocessable_entity
           end
         end
 
         # Updates a delegate.
         # @return [void]
-        def update # rubocop:disable Metrics/MethodLength
+        def update
           if @delegate.update(delegate_params)
             redirect_to admin_conferences_delegates_path, success: t('.saved')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb @delegate.full_name
-                render :edit
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @delegate.errors } }
-            end
+            add_breadcrumb @delegate.full_name
+            flash.now[:alert] = t('.failed')
+            render :edit, status: :unprocessable_entity
           end
         end
 
         # Destroys a delegate.
         # @return [void]
-        def destroy # rubocop:disable Metrics/MethodLength
+        def destroy
           if @delegate.destroy
             redirect_to admin_conferences_delegates_path, success: t('.destroyed')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb @delegate.full_name
-                render :edit
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @delegate.errors } }
-            end
+            add_breadcrumb @delegate.full_name
+            flash.now[:alert] = t('.failed')
+            render :edit, status: :unprocessable_entity
           end
         end
 

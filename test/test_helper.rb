@@ -45,19 +45,19 @@ end
 ActiveRecord::FixtureSet.context_class.include ActiveSupport::Testing::FileFixtures
 ActiveRecord::FixtureSet.context_class.file_fixture_path = ActiveSupport::TestCase.file_fixture_path
 
-module ActiveSupport
-  class TestCase
-    parallelize workers: :number_of_processors
-    parallelize_setup do |worker|
-      SimpleCov.command_name "#{SimpleCov.command_name} worker #{worker}"
-    end
-    parallelize_teardown do
-      SimpleCov.result
-    end
-
-    setup { I18n.locale = I18n.default_locale }
-  end
-end
+# module ActiveSupport
+#  class TestCase
+#    parallelize workers: :number_of_processors
+#    parallelize_setup do |worker|
+#      SimpleCov.command_name "#{SimpleCov.command_name} worker #{worker}"
+#    end
+#    parallelize_teardown do
+#      SimpleCov.result
+#    end
+#
+#    setup { I18n.locale = I18n.default_locale }
+#  end
+# end
 
 module StorageHelpers
   module ::ActiveStorage

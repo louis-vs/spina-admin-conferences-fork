@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AddTimestampsToSpinaConferencesParts < ActiveRecord::Migration[6.0]
+class AddTimestampsToSpinaConferencesParts < ActiveRecord::Migration[6.0] # :nodoc:
   def change
     default = Time.zone.now
     add_timestamps :spina_conferences_parts, default: default

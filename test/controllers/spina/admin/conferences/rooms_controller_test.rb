@@ -66,7 +66,7 @@ module Spina
           assert_no_difference 'Room.count' do
             post admin_conferences_rooms_url, params: { room: attributes }
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Room saved', flash[:success]
         end
 
@@ -77,7 +77,7 @@ module Spina
           assert_no_difference 'Room.count' do
             post admin_conferences_rooms_url, params: { room: attributes }, as: :turbo_stream
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Room saved', flash[:success]
         end
 
@@ -104,7 +104,7 @@ module Spina
           attributes[:building] = @invalid_room.building
           attributes[:number] = @invalid_room.number
           patch admin_conferences_room_url(@room), params: { room: attributes }
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Room saved', flash[:success]
         end
 
@@ -113,7 +113,7 @@ module Spina
           attributes[:building] = @invalid_room.building
           attributes[:number] = @invalid_room.number
           patch admin_conferences_room_url(@room), params: { room: attributes }, as: :turbo_stream
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Room saved', flash[:success]
         end
 
@@ -137,7 +137,7 @@ module Spina
           assert_no_difference 'Room.count' do
             delete admin_conferences_room_url(@room)
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Room deleted', flash[:success]
         end
 
@@ -145,7 +145,7 @@ module Spina
           assert_no_difference 'Room.count' do
             delete admin_conferences_room_url(@room), as: :turbo_stream
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Room deleted', flash[:success]
         end
       end

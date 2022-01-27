@@ -42,7 +42,7 @@ module Spina
         #   @return [ActiveRecord::Relation] directly associated dietary requirements
         #   @see DietaryRequirement
         has_and_belongs_to_many :dietary_requirements, -> { includes(:translations) }, foreign_key: :spina_conferences_delegate_id, # rubocop:disable Rails/HasAndBelongsToMany
-                                                                                       association_foreign_key: :spina_conferences_dietary_requirement_id
+                                                                                       association_foreign_key: :spina_conferences_dietary_requirement_id # rubocop:disable Layout/LineLength
 
         validates :first_name, :last_name, presence: true
         validates :email_address, 'spina/admin/conferences/email_address': true

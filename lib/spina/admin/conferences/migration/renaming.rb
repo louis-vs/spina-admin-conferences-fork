@@ -6,7 +6,7 @@ module Spina
   module Admin
     module Conferences
       module Migration
-        module Renaming
+        module Renaming # :nodoc:
           extend ActiveSupport::Concern
 
           included do
@@ -32,7 +32,7 @@ module Spina
 
             attr_reader :duplicate_migrations
 
-            class DuplicateMigrationsError < ::StandardError # rubocop:disable Lint/ConstantDefinitionInBlock
+            class DuplicateMigrationsError < ::StandardError # :nodoc:
               def initialize(migrations)
                 messages = migrations.collect { |migration| generate_message(migration) }
                 super(messages.join("\n"))

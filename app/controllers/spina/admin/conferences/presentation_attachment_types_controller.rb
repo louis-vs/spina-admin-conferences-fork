@@ -32,51 +32,39 @@ module Spina
 
         # Creates a presentation attachment type.
         # @return [void]
-        def create # rubocop:disable Metrics/MethodLength
+        def create
           @presentation_attachment_type = PresentationAttachmentType.new presentation_attachment_type_params
 
           if @presentation_attachment_type.save
             redirect_to admin_conferences_presentation_attachment_types_path, success: t('.saved')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb t('.new')
-                render :new
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @presentation_attachment_type.errors } }
-            end
+            add_breadcrumb t('.new')
+            flash.now[:alert] = t('.failed')
+            render :new, status: :unprocessable_entity
           end
         end
 
         # Updates a presentation attachment type.
         # @return [void]
-        def update # rubocop:disable Metrics/MethodLength
+        def update
           if @presentation_attachment_type.update(presentation_attachment_type_params)
             redirect_to admin_conferences_presentation_attachment_types_path, success: t('.saved')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb @presentation_attachment_type.name
-                render :edit
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @presentation_attachment_type.errors } }
-            end
+            add_breadcrumb @presentation_attachment_type.name
+            flash.now[:alert] = t('.failed')
+            render :edit, status: :unprocessable_entity
           end
         end
 
         # Destroys a presentation attachment type.
         # @return [void]
-        def destroy # rubocop:disable Metrics/MethodLength
+        def destroy
           if @presentation_attachment_type.destroy
             redirect_to admin_conferences_presentation_attachment_types_path, success: t('.destroyed')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb @presentation_attachment_type.name
-                render :edit
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @presentation_attachment_type.errors } }
-            end
+            add_breadcrumb @presentation_attachment_type.name
+            flash.now[:alert] = t('.failed')
+            render :edit, status: :unprocessable_entity
           end
         end
 

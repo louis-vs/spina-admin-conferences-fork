@@ -10,8 +10,6 @@ module Spina
         before_action :set_breadcrumbs
         before_action :set_tabs
 
-        layout 'spina/admin/conferences/institutions'
-
         # @!group Actions
 
         # Renders a list of rooms.
@@ -35,51 +33,39 @@ module Spina
 
         # Creates a room.
         # @return [void]
-        def create # rubocop:disable Metrics/MethodLength
+        def create
           @room = Room.new(room_params)
 
           if @room.save
             redirect_to admin_conferences_rooms_path, success: t('.saved')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb t('.new')
-                render :new
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @room.errors } }
-            end
+            add_breadcrumb t('.new')
+            flash.now[:alert] = t('.failed')
+            render :new, status: :unprocessable_entity
           end
         end
 
         # Updates a room.
         # @return [void]
-        def update # rubocop:disable Metrics/MethodLength
+        def update
           if @room.update(room_params)
             redirect_to admin_conferences_rooms_path, success: t('.saved')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb @room.name
-                render :edit
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @room.errors } }
-            end
+            add_breadcrumb @room.name
+            flash.now[:alert] = t('.failed')
+            render :edit, status: :unprocessable_entity
           end
         end
 
         # Destroys a room.
         # @return [void]
-        def destroy # rubocop:disable Metrics/MethodLength
+        def destroy
           if @room.destroy
             redirect_to admin_conferences_rooms_path, success: t('.destroyed')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb @room.name
-                render :edit
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @room.errors } }
-            end
+            add_breadcrumb @room.name
+            flash.now[:alert] = t('.failed')
+            render :edit, status: :unprocessable_entity
           end
         end
 

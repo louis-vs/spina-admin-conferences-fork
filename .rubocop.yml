@@ -38,3 +38,7 @@ Metrics/ClassLength:
 Rails/I18nLocaleAssignment:
   Exclude:
     - test/**/*
+
+Lint/ConstantDefinitionInBlock:
+  Exclude:
+    - lib/spina/admin/conferences/migration/renaming.rb

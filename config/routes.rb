@@ -4,10 +4,7 @@ Spina::Engine.routes.draw do
   namespace :admin, path: Spina.config.backend_path do
     namespace :conferences do
       root to: 'conferences#index'
-      resources :conferences, except: [:show] do
-        resources :events, only: [:new]
-      end
-      resources :events, only: [:new]
+      resources :conferences, except: [:show]
       resources :institutions, except: [:show]
       resources :rooms, except: [:show]
       resources :sessions, except: [:show]

@@ -68,7 +68,7 @@ module Spina
           assert_no_difference 'Delegate.count' do
             post admin_conferences_delegates_url, params: { delegate: attributes }
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Delegate saved', flash[:success]
         end
 
@@ -78,7 +78,7 @@ module Spina
           assert_no_difference 'Delegate.count' do
             post admin_conferences_delegates_url, params: { delegate: attributes }, as: :turbo_stream
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Delegate saved', flash[:success]
         end
 
@@ -103,7 +103,7 @@ module Spina
           attributes = @invalid_delegate.attributes
           attributes[:conference_ids] = @invalid_delegate.conference_ids
           patch admin_conferences_delegate_url(@delegate), params: { delegate: attributes }
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Delegate saved', flash[:success]
         end
 
@@ -111,7 +111,7 @@ module Spina
           attributes = @invalid_delegate.attributes
           attributes[:conference_ids] = @invalid_delegate.conference_ids
           patch admin_conferences_delegate_url(@delegate), params: { delegate: attributes }, as: :turbo_stream
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Delegate saved', flash[:success]
         end
 
@@ -137,7 +137,7 @@ module Spina
           assert_no_difference 'Delegate.count' do
             delete admin_conferences_delegate_url(@delegate)
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Delegate deleted', flash[:success]
           Delegate._destroy_callbacks = callbacks
         end
@@ -148,7 +148,7 @@ module Spina
           assert_no_difference 'Delegate.count' do
             delete admin_conferences_delegate_url(@delegate), as: :turbo_stream
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Delegate deleted', flash[:success]
           Delegate._destroy_callbacks = callbacks
         end
