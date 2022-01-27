@@ -1,8 +1,11 @@
-%tr{ data: { presentation_type_id: presentation_type.id } }
-  %td= presentation_type.conference.name
-  %td= link_to presentation_type.name, edit_admin_conferences_presentation_type_path(presentation_type)
-  %td= time_tag presentation_type.duration, t('datetime.distance_in_words.x_minutes', count: presentation_type.minutes)
-  %td.align-right
-    = link_to edit_admin_conferences_presentation_type_path(presentation_type), class: %w[button button-small button-link] do
-      = heroicon 'pencil-alt', style: :outline, class: 'w-4 h-4'
-      = t 'spina.edit'
+%tr.border-b{ data: { presentation_type_id: presentation_type.id } }
+  %td
+    .block.font-light.text-sm.p-4= presentation_type.conference.name
+  %td= link_to presentation_type.name, edit_admin_conferences_presentation_type_path(presentation_type), class: 'block text-spina font-medium text-sm p-4 hover:text-spina-dark'
+  %td
+    .block.font-light.text-sm.p-4= time_tag presentation_type.duration, t('datetime.distance_in_words.x_minutes', count: presentation_type.minutes)
+  %td
+    = link_to edit_admin_conferences_presentation_type_path(presentation_type), class: 'btn btn-default mx-4 w-max' do
+      .flex.flex-nowrap.items-center.px-8.py-1
+        = heroicon 'pencil-alt', style: :outline, class: 'w-4 h-4'
+        .ml-2= t 'spina.edit'

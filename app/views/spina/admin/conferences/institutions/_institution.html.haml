@@ -1,7 +1,9 @@
-%tr{ data: { institution_id: institution.id } }
-  %td= link_to institution.name, edit_admin_conferences_institution_path(institution)
-  %td= institution.city
-  %td.align-right
-    = link_to edit_admin_conferences_institution_path(institution), class: %w[button button-small button-link] do
-      = heroicon 'pencil-alt', style: :outline, class: 'w-4 h-4'
-      = t 'spina.edit'
+%tr.border-b{ data: { institution_id: institution.id } }
+  %td= link_to institution.name, edit_admin_conferences_institution_path(institution), class: 'block text-spina font-medium text-sm p-4 hover:text-spina-dark'
+  %td
+    .block.font-light.text-sm.p-4= institution.city
+  %td
+    = link_to edit_admin_conferences_institution_path(institution), class: 'btn btn-default mx-4 w-max' do
+      .flex.flex-nowrap.items-center.px-8.py-1
+        = heroicon 'pencil-alt', style: :outline, class: 'w-4 h-4'
+        .ml-2= t 'spina.edit'

@@ -1,11 +1,13 @@
-%tr{ data: { presentation_id: presentation.id } }
-  %td= presentation.conference.name
-  %td= link_to presentation.title, edit_admin_conferences_presentation_path(presentation)
+%tr.border-b{ data: { presentation_id: presentation.id } }
+  %td
+    .block.font-light.text-sm.p-4= presentation.conference.name
+  %td= link_to presentation.title, edit_admin_conferences_presentation_path(presentation), class: 'block text-spina font-medium text-sm p-4 hover:text-spina-dark'
   %td
     %ul
       - presentation.presenters.each do |presenter|
-        %li= link_to presenter.full_name, edit_admin_conferences_delegate_path(presenter)
-  %td.align-right
-    = link_to edit_admin_conferences_presentation_path(presentation), class: %w[button button-small button-link] do
-      = heroicon 'pencil-alt', style: :outline, class: 'w-4 h-4'
-      = t 'spina.edit'
+        %li= link_to presenter.full_name, edit_admin_conferences_delegate_path(presenter), class: 'block text-spina font-medium text-sm p-4 hover:text-spina-dark'
+  %td
+    = link_to edit_admin_conferences_presentation_path(presentation), class: 'btn btn-default mx-4 w-max' do
+      .flex.flex-nowrap.items-center.px-8.py-1
+        = heroicon 'pencil-alt', style: :outline, class: 'w-4 h-4'
+        .ml-2= t 'spina.edit'

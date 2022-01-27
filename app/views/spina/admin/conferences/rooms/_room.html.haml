@@ -1,8 +1,11 @@
-%tr{ data: { room_id: room.id } }
-  %td= room.institution.name
-  %td= room.building
-  %td= link_to room.number, edit_admin_conferences_room_path(room)
-  %td.align-right
-    = link_to edit_admin_conferences_room_path(room), class: %w[button button-small button-link] do
-      = heroicon 'pencil-alt', style: :outline, class: 'w-4 h-4'
-      = t 'spina.edit'
+%tr.border-b{ data: { room_id: room.id } }
+  %td
+    .block.font-light.text-sm.p-4= room.institution.name
+  %td
+    .block.font-light.text-sm.p-4= room.building
+  %td= link_to room.number, edit_admin_conferences_room_path(room), class: 'block text-spina font-medium text-sm p-4 hover:text-spina-dark'
+  %td
+    = link_to edit_admin_conferences_room_path(room), class: 'btn btn-default mx-4 w-max' do
+      .flex.flex-nowrap.items-center.px-8.py-1
+        = heroicon 'pencil-alt', style: :outline, class: 'w-4 h-4'
+        .ml-2= t 'spina.edit'

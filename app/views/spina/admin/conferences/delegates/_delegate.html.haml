@@ -1,13 +1,11 @@
-%tr{ data: { delegate_id: delegate.id } }
-  %td= link_to delegate.full_name, edit_admin_conferences_delegate_path(delegate)
+%tr.border-b{ data: { delegate_id: delegate.id } }
+  %td= link_to delegate.full_name, edit_admin_conferences_delegate_path(delegate), class: 'block text-spina font-medium text-sm p-4 hover:text-spina-dark'
   %td
-    = delegate.email_address
-    - unless delegate.email_address.blank?
-      = mail_to delegate.email_address, class: %w[button button-small button-link] do
-        = heroicon 'mail', style: :solid, class: 'w-7 h-7 -m1-2'
-        = t 'spina.email'
-  %td= delegate.institution.name
-  %td.align-right
-    = link_to edit_admin_conferences_delegate_path(delegate), class: %w[button button-small button-link] do
-      = heroicon 'pencil-alt', style: :outline, class: 'w-4 h-4'
-      = t 'spina.edit'
+    .block.font-light.text-sm.p-4= delegate.email_address
+  %td
+    .block.font-light.text-sm.p-4= delegate.institution.name
+  %td
+    = link_to edit_admin_conferences_delegate_path(delegate), class: 'btn btn-default mx-4 w-max' do
+      .flex.flex-nowrap.items-center.px-8.py-1
+        = heroicon 'pencil-alt', style: :outline, class: 'w-4 h-4'
+        .ml-2= t 'spina.edit'
