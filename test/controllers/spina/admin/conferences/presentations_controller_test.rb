@@ -75,7 +75,7 @@ module Spina
           assert_no_difference 'Presentation.count' do
             post admin_conferences_presentations_url, params: { presentation: attributes }
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Presentation saved', flash[:success]
         end
 
@@ -89,7 +89,7 @@ module Spina
           assert_no_difference 'Presentation.count' do
             post admin_conferences_presentations_url, params: { presentation: attributes }, as: :turbo_stream
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Presentation saved', flash[:success]
         end
 
@@ -125,7 +125,7 @@ module Spina
           attributes[:title] = @invalid_presentation.title
           attributes[:abstract] = @invalid_presentation.abstract
           patch admin_conferences_presentation_url(@presentation), params: { presentation: attributes }
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Presentation saved', flash[:success]
         end
 
@@ -137,7 +137,7 @@ module Spina
           attributes[:title] = @invalid_presentation.title
           attributes[:abstract] = @invalid_presentation.abstract
           patch admin_conferences_presentation_url(@presentation), params: { presentation: attributes }, as: :turbo_stream
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Presentation saved', flash[:success]
         end
 
@@ -163,7 +163,7 @@ module Spina
           assert_no_difference 'Presentation.count' do
             delete admin_conferences_presentation_url(@presentation)
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Presentation deleted', flash[:success]
           Presentation._destroy_callbacks = callbacks
         end
@@ -174,7 +174,7 @@ module Spina
           assert_no_difference 'Presentation.count' do
             delete admin_conferences_presentation_url(@presentation), as: :turbo_stream
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Presentation deleted', flash[:success]
           Presentation._destroy_callbacks = callbacks
         end

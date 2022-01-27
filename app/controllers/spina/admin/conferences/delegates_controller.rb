@@ -51,7 +51,7 @@ module Spina
           if @delegate.update(delegate_params)
             redirect_to admin_conferences_delegates_path, success: t('.saved')
           else
-            add_breadcrumb @delegate.name
+            add_breadcrumb @delegate.full_name
             flash.now[:alert] = t('.failed')
             render :edit, status: :unprocessable_entity
           end
@@ -63,7 +63,7 @@ module Spina
           if @delegate.destroy
             redirect_to admin_conferences_delegates_path, success: t('.destroyed')
           else
-            add_breadcrumb @delegate.name
+            add_breadcrumb @delegate.full_name
             flash.now[:alert] = t('.failed')
             render :edit, status: :unprocessable_entity
           end

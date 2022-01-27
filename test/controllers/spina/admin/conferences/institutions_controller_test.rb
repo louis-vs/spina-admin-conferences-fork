@@ -72,7 +72,7 @@ module Spina
           assert_no_difference 'Institution.count' do
             post admin_conferences_institutions_url, params: { institution: attributes }
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Institution saved', flash[:success]
         end
 
@@ -83,7 +83,7 @@ module Spina
           assert_no_difference 'Institution.count' do
             post admin_conferences_institutions_url, params: { institution: attributes }, as: :turbo_stream
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Institution saved', flash[:success]
         end
 
@@ -110,7 +110,7 @@ module Spina
           attributes[:name] = @invalid_institution.name
           attributes[:city] = @invalid_institution.city
           patch admin_conferences_institution_url(@institution), params: { institution: attributes }
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Institution saved', flash[:success]
         end
 
@@ -119,7 +119,7 @@ module Spina
           attributes[:name] = @invalid_institution.name
           attributes[:city] = @invalid_institution.city
           patch admin_conferences_institution_url(@institution), params: { institution: attributes }, as: :turbo_stream
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Institution saved', flash[:success]
         end
 
@@ -143,7 +143,7 @@ module Spina
           assert_no_difference 'Institution.count' do
             delete admin_conferences_institution_url(@institution)
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Institution deleted', flash[:success]
         end
 
@@ -151,7 +151,7 @@ module Spina
           assert_no_difference 'Institution.count' do
             delete admin_conferences_institution_url(@institution), as: :turbo_stream
           end
-          assert_response :success
+          assert_response :unprocessable_entity
           assert_not_equal 'Institution deleted', flash[:success]
         end
       end
