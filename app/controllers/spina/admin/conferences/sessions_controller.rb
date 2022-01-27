@@ -40,13 +40,9 @@ module Spina
           if @session.save
             redirect_to admin_conferences_sessions_path, success: t('.saved')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb t('.new')
-                render :new
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @session.errors } }
-            end
+            add_breadcrumb t('.new')
+            flash.now[:alert] = t('.failed')
+            render :new, status: :unprocessable_entity
           end
         end
 
@@ -56,13 +52,9 @@ module Spina
           if @session.update(session_params)
             redirect_to admin_conferences_sessions_path, success: t('.saved')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb @session.name
-                render :edit
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @session.errors } }
-            end
+            add_breadcrumb @session.name
+            flash.now[:alert] = t('.failed')
+            render :edit, status: :unprocessable_entity
           end
         end
 

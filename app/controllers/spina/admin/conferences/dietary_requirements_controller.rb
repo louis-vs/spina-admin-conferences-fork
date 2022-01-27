@@ -39,13 +39,9 @@ module Spina
           if @dietary_requirement.save
             redirect_to admin_conferences_dietary_requirements_path, success: t('.saved')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb t('.new')
-                render :new
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @dietary_requirement.errors } }
-            end
+            add_breadcrumb t('.new')
+            flash.now[:alert] = t('.failed')
+            render :new, status: :unprocessable_entity
           end
         end
 
@@ -55,13 +51,9 @@ module Spina
           if @dietary_requirement.update(dietary_requirement_params)
             redirect_to admin_conferences_dietary_requirements_path, success: t('.saved')
           else
-            respond_to do |format|
-              format.html do
-                add_breadcrumb @dietary_requirement.name
-                render :edit
-              end
-              format.turbo_stream { render partial: 'errors', locals: { errors: @dietary_requirement.errors } }
-            end
+            add_breadcrumb @dietary_requirement.name
+            flash.now[:alert] = t('.failed')
+            render :edit, status: :unprocessable_entity
           end
         end
 
