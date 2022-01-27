@@ -19,7 +19,6 @@ module Spina
         end
 
         test 'creating a delegate' do
-          skip 'Not currently worth the time trying to figure this one out.'
           visit admin_conferences_delegates_path
           click_on 'New delegate'
           assert_text 'New delegate'
@@ -37,7 +36,6 @@ module Spina
         end
 
         test 'updating a delegate' do
-          skip 'Not currently worth the time trying to figure this one out.'
           visit admin_conferences_delegates_path
           within "tr[data-delegate-id=\"#{@delegate.id}\"]" do
             click_on 'Edit'

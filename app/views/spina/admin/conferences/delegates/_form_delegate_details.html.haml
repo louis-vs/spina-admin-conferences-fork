@@ -21,7 +21,7 @@
   = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Delegate.human_attribute_name(:conferences)) do
     %table.table{ style: 'margin: 0' }
       %tbody.collection-check-boxes
-        = f.collection_check_boxes :dietary_requirement_ids, Spina::Admin::Conferences::Conference.all, :id, :name do |builder|
+        = f.collection_check_boxes :conference_ids, Spina::Admin::Conferences::Conference.all, :id, :name do |builder|
           %tr
             %td{ style: "padding-left: 16px" }
               .form-checkbox
