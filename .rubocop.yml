@@ -42,3 +42,7 @@ Rails/I18nLocaleAssignment:
 Lint/ConstantDefinitionInBlock:
   Exclude:
     - lib/spina/admin/conferences/migration/renaming.rb
+
+Lint/MissingSuper:
+  Exclude:
+    - app/components/**/*
