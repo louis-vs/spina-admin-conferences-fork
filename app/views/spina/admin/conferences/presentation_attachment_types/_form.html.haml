@@ -13,6 +13,8 @@
       = t '.save'
 
 .p-4.md:p-8
-  = form_with model: [spina, :admin_conferences, @presentation_attachment_type], id: dom_id(@presentation_attachment_type), html: { autocomplete: 'off' } do |f|
-    = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::DietaryRequirement.human_attribute_name(:name)) do
-      = render Spina::Forms::TextFieldComponent.new(f, :name)
+  .max-w-5xl
+    = form_with model: [spina, :admin_conferences, @presentation_attachment_type], id: dom_id(@presentation_attachment_type), html: { autocomplete: 'off' } do |f|
+      .-mt-6
+      = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::DietaryRequirement.human_attribute_name(:name)) do
+        = render Spina::Forms::TextFieldComponent.new(f, :name)

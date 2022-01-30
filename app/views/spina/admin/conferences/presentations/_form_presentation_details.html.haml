@@ -1,18 +1,19 @@
 = form_with model: [spina, :admin_conferences, @presentation], id: dom_id(@presentation), html: { autocomplete: 'off' } do |f|
   %div{ data: { controller: 'select-options', select_options: { record_value: @conferences } } }
-    = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:conference)) do
-      = select_tag :conference_id, options_from_collection_for_select(Spina::Admin::Conferences::Conference.all, :id, :name, (@presentation.conference.id unless @presentation.conference.blank?)), include_blank: true, required: true, data: { action: 'spina--admin--conferences--select-options#setVisibility', 'spina--admin--conferences--select_options_target': 'select', text_key: 'name' }
-    = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:presentation_type)) do
-      = select_tag :presentation_type_id, options_from_collection_for_select((@presentation.conference || Spina::Admin::Conferences::Conference.first).presentation_types, :id, :name, (@presentation.presentation_type.id unless @presentation.presentation_type.blank?)), include_blank: true, required: true, data: { action: 'spina--admin--conferences--select-options#setVisibility','spina--admin--conferences--select_options_target': 'select', key_path: 'presentation_types', text_key: 'name' }
-    = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:session)) do
-      = f.collection_select :session_id, (@presentation.presentation_type || Spina::Admin::Conferences::Conference.first).sessions, :id, :name, { include_blank: true }, required: true, data: {'spina--admin--conferences--select_options_target': 'select', key_path: 'presentation_types:sessions', text_key: 'name' }
+    .-mt-6
+    = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:conference)) do
+      = select_tag :conference_id, options_from_collection_for_select(Spina::Admin::Conferences::Conference.all, :id, :name, (@presentation.conference.id unless @presentation.conference.blank?)), include_blank: true, required: true, data: { action: 'select-options#setVisibility', 'select_options_target': 'select', text_key: 'name' }, class: 'form-select'
+    = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:presentation_type)) do
+      = select_tag :presentation_type_id, options_from_collection_for_select((@presentation.conference || Spina::Admin::Conferences::Conference.first).presentation_types, :id, :name, (@presentation.presentation_type.id unless @presentation.presentation_type.blank?)), include_blank: true, required: true, data: { action: 'select-options#setVisibility','select_options_target': 'select', key_path: 'presentation_types', text_key: 'name' }, class: 'form-select'
+    = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:session)) do
+      = f.collection_select :session_id, (@presentation.presentation_type || Spina::Admin::Conferences::Conference.first).sessions, :id, :name, { include_blank: true }, required: true, data: {'select_options_target': 'select', key_path: 'presentation_types:sessions', text_key: 'name' }, class: 'form-select'
 
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:start_datetime)) do
-    = f.datetime_field :start_datetime
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:title)) do
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:start_datetime)) do
+    = f.datetime_field :start_datetime, class: 'form-input'
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:title)) do
     = render Spina::Forms::TextFieldComponent.new(f, :title)
 
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:abstract)) do
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:abstract)) do
     .mt-1.relative
       = f.hidden_field :abstract, id: "#{f.object.object_id}_input"
 
@@ -21,16 +22,12 @@
 
         %trix-editor(class='prose prose-sm focus:outline-none max-w-3xl xl:border-r border-dashed border-gray-200 pr-3' toolbar="#{f.object.object_id}_trix-toolbar" input="#{f.object.object_id}_input" data-trix-target='editor' data-action='trix-file-accept->trix#preventDefault')
 
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:presenters)) do
-    %table.table{ style: 'margin: 0' }
-      %tbody
-        = f.collection_check_boxes :presenter_ids, Spina::Admin::Conferences::Delegate.order(:last_name, :first_name), :id, :reversed_name_and_institution do |builder|
-          %tr
-            %td{ style: "padding-left: 16px" }
-              .form-checkbox
-                = builder.check_box
-                = builder.label
-
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Presentation.human_attribute_name(:presenters)) do
+    %ul.list-none.ml-4
+      = f.collection_check_boxes :presenter_ids, Spina::Admin::Conferences::Delegate.order(:last_name, :first_name), :id, :reversed_name_and_institution, {}, class: 'form-checkbox rounded' do |builder|
+        %li
+          = builder.check_box
+          %span.text-sm.font-medium.text-gray-600= builder.label
 
   .mt-6{ 'data-controller': 'repeater' }
     %label.block.text-sm.leading-5.font-medium.text-gray-700= Spina::Admin::Conferences::Presentation.human_attribute_name :attachments

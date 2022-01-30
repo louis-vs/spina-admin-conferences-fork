@@ -1,29 +1,24 @@
 = form_with model: [spina, :admin_conferences, @delegate], id: dom_id(@delegate), html: { autocomplete: 'off' } do |f|
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Delegate.human_attribute_name(:first_name)) do
+  .-mt-6
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Delegate.human_attribute_name(:first_name)) do
     = render Spina::Forms::TextFieldComponent.new(f, :first_name)
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Delegate.human_attribute_name(:last_name)) do
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Delegate.human_attribute_name(:last_name)) do
     = render Spina::Forms::TextFieldComponent.new(f, :last_name)
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Room.human_attribute_name(:institution)) do
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Room.human_attribute_name(:institution)) do
     = f.collection_select :institution_id, Spina::Admin::Conferences::Institution.all, :id, :name, {}, class: 'form-select'
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Room.human_attribute_name(:email_address)) do
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Room.human_attribute_name(:email_address)) do
     = f.email_field :email_address, class: 'form-input block w-full max-w-5xl sm:text-sm sm:leading-5'
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Room.human_attribute_name(:url)) do
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Room.human_attribute_name(:url)) do
     = f.url_field :url, class: 'form-input block w-full max-w-5xl sm:text-sm sm:leading-5'
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Delegate.human_attribute_name(:dietary_requirements)) do
-    %table.table{ style: 'margin: 0' }
-      %tbody.collection-check-boxes
-        = f.collection_check_boxes :dietary_requirement_ids, Spina::Admin::Conferences::DietaryRequirement.all, :id, :name do |builder|
-          %tr
-            %td{ style: "padding-left: 16px" }
-              .form-checkbox
-                = builder.check_box
-                = builder.label
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Delegate.human_attribute_name(:conferences)) do
-    %table.table{ style: 'margin: 0' }
-      %tbody.collection-check-boxes
-        = f.collection_check_boxes :conference_ids, Spina::Admin::Conferences::Conference.all, :id, :name do |builder|
-          %tr
-            %td{ style: "padding-left: 16px" }
-              .form-checkbox
-                = builder.check_box
-                = builder.label
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Delegate.human_attribute_name(:dietary_requirements)) do
+    %ul.list-none.ml-4
+      = f.collection_check_boxes :dietary_requirement_ids, Spina::Admin::Conferences::DietaryRequirement.all, :id, :name, {}, class: 'form-checkbox rounded' do |builder|
+        %li
+          = builder.check_box
+          %span.text-sm.font-medium.text-gray-600= builder.label
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Delegate.human_attribute_name(:conferences)) do |builder|
+    %ul.list-none.ml-4
+      = f.collection_check_boxes :conference_ids, Spina::Admin::Conferences::Conference.all, :id, :name, {}, class: 'form-checkbox rounded' do |builder|
+        %li
+          = builder.check_box
+          %span.text-sm.font-medium.text-gray-600= builder.label

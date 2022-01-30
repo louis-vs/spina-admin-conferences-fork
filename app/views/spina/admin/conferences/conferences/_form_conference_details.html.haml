@@ -1,9 +1,10 @@
-= render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Conference.human_attribute_name(:name)) do
+.-mt-6
+= render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Conference.human_attribute_name(:name)) do
   = render Spina::Forms::TextFieldComponent.new(f, :name)
-= render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Conference.human_attribute_name(:start_date)) do
-  = f.date_field :start_date, value: (@conference.start_date.strftime("%Y-%m-%d") if @conference.start_date.present?), placeholder: Spina::Admin::Conferences::Conference.human_attribute_name(:start_date)
-= render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Conference.human_attribute_name(:finish_date)) do
-  = f.date_field :finish_date, value: (@conference.finish_date.strftime("%Y-%m-%d") if @conference.finish_date.present?), placeholder: Spina::Admin::Conferences::Conference.human_attribute_name(:finish_date)
+= render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Conference.human_attribute_name(:start_date)) do
+  = f.date_field :start_date, value: (@conference.start_date.strftime("%Y-%m-%d") if @conference.start_date.present?), placeholder: Spina::Admin::Conferences::Conference.human_attribute_name(:start_date), class: 'form-input'
+= render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Conference.human_attribute_name(:finish_date)) do
+  = f.date_field :finish_date, value: (@conference.finish_date.strftime("%Y-%m-%d") if @conference.finish_date.present?), placeholder: Spina::Admin::Conferences::Conference.human_attribute_name(:finish_date), class: 'form-input'
 
 
 .mt-6{ 'data-controller': 'repeater' }

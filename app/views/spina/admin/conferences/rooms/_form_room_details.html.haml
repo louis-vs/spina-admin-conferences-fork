@@ -1,7 +1,8 @@
 = form_with model: [spina, :admin_conferences, @room], id: dom_id(@room), html: { autocomplete: 'off' } do |f|
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Room.human_attribute_name(:institution)) do
+  .-mt-6
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Room.human_attribute_name(:institution)) do
     = f.collection_select :institution_id, Spina::Admin::Conferences::Institution.all, :id, :name, {}, class: 'form-select'
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Institution.human_attribute_name(:building)) do
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Institution.human_attribute_name(:building)) do
     = render Spina::Forms::TextFieldComponent.new(f, :building)
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Institution.human_attribute_name(:number)) do
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Institution.human_attribute_name(:number)) do
     = render Spina::Forms::TextFieldComponent.new(f, :number)

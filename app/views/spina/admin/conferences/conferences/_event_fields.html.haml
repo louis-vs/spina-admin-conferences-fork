@@ -1,16 +1,16 @@
 %div{ data: { 'part-id': "#{f.object.object_id}", 'tabs-target': 'pane' }, id: "pane_#{f.object.object_id}" }
   = f.hidden_field :id
 
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Event.human_attribute_name(:name)) do
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Event.human_attribute_name(:name)) do
     = render Spina::Forms::TextFieldComponent.new(f, :name)
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Event.human_attribute_name(:start_datetime)) do
-    = f.datetime_field :start_datetime
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Event.human_attribute_name(:finish_datetime)) do
-    = f.datetime_field :finish_datetime
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Event.human_attribute_name(:location)) do
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Event.human_attribute_name(:start_datetime)) do
+    = f.datetime_field :start_datetime, class: 'form-input'
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Event.human_attribute_name(:finish_datetime)) do
+    = f.datetime_field :finish_datetime, class: 'form-input'
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Event.human_attribute_name(:location)) do
     = render Spina::Forms::TextFieldComponent.new(f, :location)
 
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Event.human_attribute_name(:description)) do
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Event.human_attribute_name(:description)) do
     .mt-1.relative
       = f.hidden_field :description, id: "#{f.object.object_id}_input"
 

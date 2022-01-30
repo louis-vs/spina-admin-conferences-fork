@@ -1,15 +1,16 @@
 = form_with model: [spina, :admin_conferences, @session], id: dom_id(@session), html: { autocomplete: 'off' } do |f|
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Session.human_attribute_name(:name)) do
+  .-mt-6
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Session.human_attribute_name(:name)) do
     = render Spina::Forms::TextFieldComponent.new(f, :name)
 
   %div{ data: { controller: 'select-options', 'select_options': { record_value: @conferences } } }
-    = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Session.human_attribute_name(:conference)) do
+    = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Session.human_attribute_name(:conference)) do
       = select_tag :conference_id, options_from_collection_for_select(Spina::Admin::Conferences::Conference.all, :id, :name, (@session.conference.id unless @session.conference.blank?)), include_blank: true, data: { action: 'select-options#setVisibility','select_options_target': 'select', text_key: 'name' }
-    = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Session.human_attribute_name(:presentation_type)) do
+    = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Session.human_attribute_name(:presentation_type)) do
       = f.collection_select :presentation_type_id, @session.conference.present? ? @session.conference.presentation_types : Spina::Admin::Conferences::Conference.first.presentation_types, :id, :name, { include_blank: true }, data: {'select_options_target': 'select', text_key: 'name', key_path: 'presentation_types' }
 
   %div{ data: { controller: 'select-options', 'select_options': { record_value: @institutions } } }
-    = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Session.human_attribute_name(:institution)) do
+    = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Session.human_attribute_name(:institution)) do
       = select_tag :institution_id, options_from_collection_for_select(Spina::Admin::Conferences::Institution.all, :id, :name, (@session.institution.id unless @session.institution.blank?)), include_blank: true, data: { action: 'select-options#setVisibility','select_options_target': 'select', text_key: 'name' }
-    = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::Session.human_attribute_name(:room)) do
+    = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::Session.human_attribute_name(:room)) do
       = f.collection_select :room_id, @session.institution.present? ? @session.institution.rooms : Spina::Admin::Conferences::Institution.first.rooms, :id, :name, { include_blank: true }, data: {'select_options_target': 'select', text_key: 'name', key_path: 'rooms' }

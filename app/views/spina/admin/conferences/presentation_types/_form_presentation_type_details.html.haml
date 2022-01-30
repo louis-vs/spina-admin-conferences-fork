@@ -1,7 +1,8 @@
 = form_with model: [spina, :admin_conferences, @presentation_type], id: dom_id(@presentation_type), html: { autocomplete: 'off' } do |f|
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::PresentationType.human_attribute_name(:conference)) do
+  .-mt-6
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::PresentationType.human_attribute_name(:conference)) do
     = f.collection_select :conference_id, Spina::Admin::Conferences::Conference.order(:dates).reverse_order, :id, :name
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::PresentationType.human_attribute_name(:name)) do
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::PresentationType.human_attribute_name(:name)) do
     = render Spina::Forms::TextFieldComponent.new(f, :name)
-  = render Spina::Forms::GroupComponent.new(label: Spina::Admin::Conferences::PresentationType.human_attribute_name(:duration)) do
+  = render Spina::Admin::Conferences::FormGroupComponent.new(label: Spina::Admin::Conferences::PresentationType.human_attribute_name(:duration)) do
     = f.number_field :minutes, value: @presentation_type.minutes, placeholder: Spina::Admin::Conferences::PresentationType.human_attribute_name(:duration), required: true, step: 5, min: 5
