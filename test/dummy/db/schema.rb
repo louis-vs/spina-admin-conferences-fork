@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_04_17_102514) do
     t.string "name", null: false
     t.text "body"
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
+    t.integer "record_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "locale"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2021_04_17_102514) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
+    t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 2021_04_17_102514) do
   create_table "spina_conferences_conference_translations", force: :cascade do |t|
     t.string "name"
     t.string "locale", null: false
-    t.bigint "spina_conferences_conference_id", null: false
+    t.integer "spina_conferences_conference_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["locale"], name: "index_b1ed8f417185e6e49c50c1f2119c86824e3e3a22"
@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(version: 2021_04_17_102514) do
   create_table "spina_conferences_dietary_requirement_translations", force: :cascade do |t|
     t.string "name"
     t.string "locale", null: false
-    t.bigint "spina_conferences_dietary_requirement_id", null: false
+    t.integer "spina_conferences_dietary_requirement_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["locale"], name: "index_e52faf9b7cbf3a3d55057c84094a3a10b5de6fdd"
@@ -166,7 +166,7 @@ ActiveRecord::Schema.define(version: 2021_04_17_102514) do
     t.string "name"
     t.string "location"
     t.string "locale", null: false
-    t.bigint "spina_conferences_event_id", null: false
+    t.integer "spina_conferences_event_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["locale"], name: "index_spina_conferences_event_translations_on_locale"
@@ -176,7 +176,7 @@ ActiveRecord::Schema.define(version: 2021_04_17_102514) do
   create_table "spina_conferences_events", force: :cascade do |t|
     t.datetime "start_datetime"
     t.datetime "finish_datetime"
-    t.bigint "conference_id"
+    t.integer "conference_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["conference_id"], name: "index_spina_conferences_events_on_conference_id"
@@ -186,7 +186,7 @@ ActiveRecord::Schema.define(version: 2021_04_17_102514) do
     t.string "name"
     t.string "city"
     t.string "locale", null: false
-    t.bigint "spina_conferences_institution_id", null: false
+    t.integer "spina_conferences_institution_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["locale"], name: "index_9bff91c74e064cdc801502a3787ebe9a10fdecd1"
@@ -204,9 +204,9 @@ ActiveRecord::Schema.define(version: 2021_04_17_102514) do
     t.string "title"
     t.string "name"
     t.string "partable_type"
-    t.bigint "partable_id"
+    t.integer "partable_id"
     t.string "pageable_type"
-    t.bigint "pageable_id"
+    t.integer "pageable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -214,7 +214,7 @@ ActiveRecord::Schema.define(version: 2021_04_17_102514) do
   create_table "spina_conferences_presentation_attachment_type_translations", force: :cascade do |t|
     t.string "name"
     t.string "locale", null: false
-    t.bigint "spina_conferences_presentation_attachment_type_id", null: false
+    t.integer "spina_conferences_presentation_attachment_type_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["locale"], name: "index_f3417b08c78b5a87825d3f14b49fb06e76b8bed4"
@@ -227,9 +227,9 @@ ActiveRecord::Schema.define(version: 2021_04_17_102514) do
   end
 
   create_table "spina_conferences_presentation_attachments", force: :cascade do |t|
-    t.bigint "presentation_id", null: false
-    t.bigint "attachment_type_id", null: false
-    t.bigint "attachment_id"
+    t.integer "presentation_id", null: false
+    t.integer "attachment_type_id", null: false
+    t.integer "attachment_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["attachment_id"], name: "index_conferences_presentation_attachments_on_attachment_id"
@@ -240,7 +240,7 @@ ActiveRecord::Schema.define(version: 2021_04_17_102514) do
   create_table "spina_conferences_presentation_translations", force: :cascade do |t|
     t.string "title"
     t.string "locale", null: false
-    t.bigint "spina_conferences_presentation_id", null: false
+    t.integer "spina_conferences_presentation_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["locale"], name: "index_0cda3821bc3be79968f9671e2a1d655e2307ad5b"
@@ -250,7 +250,7 @@ ActiveRecord::Schema.define(version: 2021_04_17_102514) do
   create_table "spina_conferences_presentation_type_translations", force: :cascade do |t|
     t.string "name"
     t.string "locale", null: false
-    t.bigint "spina_conferences_presentation_type_id", null: false
+    t.integer "spina_conferences_presentation_type_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["locale"], name: "index_22c39c0f300797c95ab75d46960dc27730d2065f"
@@ -278,7 +278,7 @@ ActiveRecord::Schema.define(version: 2021_04_17_102514) do
     t.string "building"
     t.string "number"
     t.string "locale", null: false
-    t.bigint "spina_conferences_room_id", null: false
+    t.integer "spina_conferences_room_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["locale"], name: "index_spina_conferences_room_translations_on_locale"
@@ -295,7 +295,7 @@ ActiveRecord::Schema.define(version: 2021_04_17_102514) do
   create_table "spina_conferences_session_translations", force: :cascade do |t|
     t.string "name"
     t.string "locale", null: false
-    t.bigint "spina_conferences_session_id", null: false
+    t.integer "spina_conferences_session_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["locale"], name: "index_spina_conferences_session_translations_on_locale"

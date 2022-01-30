@@ -1,2 +1,2 @@
-= render Spina::Forms::GroupComponent.new(label: f.object.title) do
-  = f.date_field :content, placeholder: f.object.title
+= render Spina::Admin::Conferences::FormGroupComponent.new(label: f.object.title) do
+  = f.date_field :content, placeholder: f.object.title, class: 'form-select'

@@ -1,4 +1,2 @@
-.mt-6
-  %label.block.text-sm.leading-5.font-medium.text-gray-700= f.object.title
-  .mt-1
-    = f.email_field :content, class: 'form-input block w-full max-w-5xl sm:text-sm sm:leading-5'
+= render Spina::Admin::Conferences::FormGroupComponent.new(label: f.object.title) do
+  = f.email_field :content, class: 'form-input block w-full max-w-5xl sm:text-sm sm:leading-5'

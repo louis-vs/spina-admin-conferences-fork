@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    spina-admin-conferences-fork (3.0.0.rc1)
+    spina-admin-conferences-fork (3.0.0.rc2)
       haml-rails (~> 2.0)
       icalendar (~> 2.5)
       mobility-actiontext (~> 0.2)
@@ -293,7 +293,7 @@ GEM
     simplecov-html (0.12.3)
     simplecov-lcov (0.8.0)
     simplecov_json_formatter (0.1.3)
-    spina (2.8.0)
+    spina (2.8.1)
       ancestry
       attr_json
       babosa
