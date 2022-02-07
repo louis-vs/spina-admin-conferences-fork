@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    spina-admin-conferences-fork (3.0.0.rc2)
+    spina-admin-conferences-fork (3.0.0.rc3)
       haml-rails (~> 2.0)
       icalendar (~> 2.5)
       mobility-actiontext (~> 0.2)
@@ -204,7 +204,7 @@ GEM
     parser (3.1.0.0)
       ast (~> 2.4.1)
     percy-capybara (4.3.3)
-    pg (1.3.0)
+    pg (1.3.1)
     public_suffix (4.0.6)
     puma (5.6.1)
       nio4r (~> 2.0)
