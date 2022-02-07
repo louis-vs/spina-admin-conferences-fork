@@ -22,4 +22,6 @@
                                                               active: controller_name == 'sessions')
 
 = render partial: 'conferences', object: @conferences
-= link_to_next_page @conferences, 'Next'
+.ml-8.inline-flex
+  .btn.btn-primary= link_to_prev_page @conferences, 'Previous'
+  .btn.btn-primary= link_to_next_page @conferences, 'Next'
