@@ -14,4 +14,6 @@
         = t '.new'
 
 = render partial: 'delegates', object: @delegates
-= link_to_next_page @delegates, 'Next'
+.ml-8.inline-flex
+  .btn.btn-primary= link_to_prev_page @delegates, 'Previous'
+  .btn.btn-primary= link_to_next_page @delegates, 'Next'

@@ -6,4 +6,6 @@
         = t '.new'
 
 = render partial: 'dietary_requirements', object: @dietary_requirements
-= link_to_next_page @dietary_requirements, 'Next'
+.ml-8.inline-flex
+  .btn.btn-primary= link_to_prev_page @dietary_requirements, 'Previous'
+  .btn.btn-primary= link_to_next_page @dietary_requirements, 'Next'

@@ -22,4 +22,6 @@
                                                               active: controller_name == 'sessions')
 
 = render partial: 'sessions', object: @sessions
-= link_to_next_page @sessions, 'Next'
+.ml-8.inline-flex
+  .btn.btn-primary= link_to_prev_page @sessions, 'Previous'
+  .btn.btn-primary= link_to_next_page @sessions, 'Next'

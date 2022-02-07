@@ -6,4 +6,6 @@
         = t '.new'
 
 = render partial: 'presentation_attachment_types', object: @presentation_attachment_types
-= link_to_next_page @presentation_attachment_types, 'Next'
+.ml-8.inline-flex
+  .btn.btn-primary= link_to_prev_page @presentation_attachment_types, 'Previous'
+  .btn.btn-primary= link_to_next_page @presentation_attachment_types, 'Next'
