@@ -36,6 +36,11 @@
     part_type: 'Spina::Parts::Repeater',
     parts: %w[name logo description]
   }, {
+    name: 'documents',
+    title: 'Documents',
+    part_type: 'Spina::Parts::Repeater',
+    parts: %w[name attachment]
+  }, {
     name: 'minutes',
     title: 'Minutes',
     part_type: 'Spina::Parts::Repeater',
