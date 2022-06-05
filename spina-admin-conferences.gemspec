@@ -37,7 +37,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'dotenv-rails', '~> 2.7'
   spec.add_development_dependency 'image_processing', '~> 1.12'
   spec.add_development_dependency 'minitest-reporters', '~> 1.4'
-  spec.add_development_dependency 'percy-capybara', '~> 4.3'
+  spec.add_development_dependency 'percy-capybara', '~> 5.0'
   spec.add_development_dependency 'puma', '~> 5.0'
   spec.add_development_dependency 'reek', '~> 6.0'
   spec.add_development_dependency 'rubocop', '~> 1.8'
