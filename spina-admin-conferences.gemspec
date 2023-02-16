@@ -44,7 +44,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop-performance', '~> 1.8'
   spec.add_development_dependency 'rubocop-rails', '~> 2.8'
   spec.add_development_dependency 'selenium-webdriver', '~> 4.1'
-  spec.add_development_dependency 'sidekiq', '~> 6.1'
+  spec.add_development_dependency 'sidekiq', '~> 7.0'
   spec.add_development_dependency 'simplecov', '~> 0.19'
   spec.add_development_dependency 'simplecov-lcov', '~> 0.8'
   spec.add_development_dependency 'web-console', '~> 4.0'
